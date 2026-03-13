@@ -1,60 +1,20 @@
-{% load static %}
-
+{ % load static %}
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Niemiecki z Anią</title>
-
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% title block %}Document{% endblock %}</title>
 </head>
-
 <body>
-
-<!-- HEADER / NAVBAR -->
-<header class="navbar">
-
-    <div class="container">
-
-        <div class="logo">
-            <a href="/">🇩🇪 Niemiecki z Anią</a>
-        </div>
-
-        <nav class="nav-menu">
-            <ul class="nav-links">
-
-                <li><a href="/">Home</a></li>
-                <li><a href="/jak-ucze/">Jak uczę</a></li>
-                <li><a href="/materialy/">Materiały</a></li>
-                <li><a href="/sklep/">Sklep</a></li>
-                <li><a href="/kontakt/">Kontakt</a></li>
-
-            </ul>
+    <header>
+        <nav>
+            <li>
+                <a href="/">home</a>
+                <a href="/"
+            </li>
         </nav>
 
-    </div>
-
-</header>
-
-
-<!-- GŁÓWNA TREŚĆ -->
-<main class="main-content">
-
-    {% block content %}
-    {% endblock %}
-
-</main>
-
-
-<!-- FOOTER -->
-<footer class="footer">
-
-    <div class="container">
-        <p>© 2026 Niemiecki z Anią</p>
-    </div>
-
-</footer>
-
-
+    </header>
 </body>
 </html>
