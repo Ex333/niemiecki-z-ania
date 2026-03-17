@@ -1,20 +1,62 @@
-{ % load static %}
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% title block %}Document{% endblock %}</title>
-</head>
-<body>
-    <header>
-        <nav>
-            <li>
-                <a href="/">home</a>
-                <a href="/"
-            </li>
-        </nav>
 
+    <title>{% block title %}Niemiecki z Anią{% endblock %}</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- FONT (ładniejszy wygląd) -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+
+    <!-- 🔝 NAVBAR -->
+    <header class="navbar">
+        <div class="nav-container">
+
+            <a href="/" class="logo">
+                Niemiecki z Anią 🇩🇪
+            </a>
+
+            <nav class="nav-links">
+                <a href="/">Start</a>
+                <a href="/materialy/">Materiały</a>
+                <a href="/sklep/">Sklep</a>
+                <a href="/kontakt/">Kontakt</a>
+            </nav>
+
+        </div>
     </header>
+
+    <!-- 📦 CONTENT -->
+    <main class="main-content">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <!-- 🔻 FOOTER -->
+    <footer class="footer">
+        <div class="footer-container">
+
+            <div>
+                <h3>Niemiecki z Anią 🇩🇪</h3>
+                <p>Nauka niemieckiego w praktyczny i przyjemny sposób.</p>
+            </div>
+
+            <div class="footer-links">
+                <a href="/sklep/">Sklep</a>
+                <a href="/kontakt/">Kontakt</a>
+            </div>
+
+        </div>
+    </footer>
+
 </body>
 </html>
