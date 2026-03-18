@@ -11,29 +11,29 @@ body {
     color: #222;
 }
 
-/* CONTAINER */
+/* 📦 CONTAINER */
 .main-content {
     width: 90%;
     max-width: 1200px;
-    margin: 40px auto;
+    margin: 60px auto;
 }
 
 /* 🔝 NAVBAR */
 .navbar {
     position: sticky;
     top: 0;
-    height: 80px;
+    height: 95px;
     background: linear-gradient(90deg, #1b5e20, #2e7d32);
     display: flex;
     align-items: center;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    box-shadow: 0 6px 25px rgba(0,0,0,0.12);
     z-index: 1000;
 }
 
+/* 🔥 KLUCZ – LOGO DO LEWEJ */
 .nav-container {
-    width: 95%;
-    max-width: 1300px;
-    margin: auto;
+    width: 100%;
+    padding: 0 40px; /* ← zamiast margin auto */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -41,15 +41,24 @@ body {
 
 /* LOGO */
 .logo img {
-    height: 65px;
-    width: auto;
+    height: 150px; 
     display: block;
+    transition: 0.3s;
+}
+
+.logo img:hover {
+    transform: scale(1.05);
 }
 
 /* NAV LINKS */
+.nav-links {
+    display: flex;
+    align-items: center;
+}
+
 .nav-links a {
     color: white;
-    margin-left: 25px;
+    margin-left: 30px;
     text-decoration: none;
     font-weight: 400;
     position: relative;
@@ -64,7 +73,7 @@ body {
     height: 2px;
     background: gold;
     left: 0;
-    bottom: -5px;
+    bottom: -6px;
     transition: 0.3s;
 }
 
@@ -72,26 +81,28 @@ body {
     width: 100%;
 }
 
-/* 🔥 CTA button w navbarze */
+/* 🔥 CTA button */
 .btn-nav {
     background: gold;
     color: #1b5e20 !important;
-    padding: 8px 16px;
-    border-radius: 8px;
-    margin-left: 25px;
+    padding: 8px 18px;
+    border-radius: 10px;
+    margin-left: 30px;
     font-weight: 600;
+    transition: 0.3s;
 }
 
 .btn-nav:hover {
     background: #ffd54f;
+    transform: translateY(-2px);
 }
 
 /* 🔻 FOOTER */
 .footer {
     background: #1b5e20;
     color: white;
-    padding: 50px 0 20px;
-    margin-top: 80px;
+    padding: 30px 0 10px; /* było 60 → za dużo */
+    margin-top: 40px;
 }
 
 .footer-container {
@@ -100,28 +111,55 @@ body {
     margin: auto;
     display: flex;
     justify-content: space-between;
+    align-items: flex-start;
+    gap: 30px;
 }
 
+/* tekst */
+.footer-col p {
+    font-size: 14px;
+    color: #c8e6c9;
+}
+
+/* linki */
 .footer-links a {
     display: block;
-    color: #e8f5e9;
-    text-decoration: none;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
+    font-size: 14px;
 }
 
-.footer-links a:hover {
-    color: gold;
-}
-
+/* dół */
 .footer-bottom {
     text-align: center;
-    margin-top: 30px;
-    font-size: 14px;
-    opacity: 0.7;
+    margin-top: 20px;
+    font-size: 13px;
+    opacity: 0.6;
 }
 
+/* 🔥 SOCIAL MEDIA */
+.socials img {
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+    transition: 0.3s;
+    filter: brightness(0) invert(1);
+}
+
+.socials img:hover {
+    transform: scale(1.15);
+    opacity: 0.8;
+}
 /* 📱 MOBILE */
 @media (max-width: 768px) {
+
+    .nav-container {
+        padding: 0 20px;
+    }
+
+    .logo img {
+        height: 60px;
+    }
+
     .nav-links {
         display: none;
     }
@@ -130,4 +168,17 @@ body {
         flex-direction: column;
         text-align: center;
     }
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.main-content {
+    flex: 1;
 }
