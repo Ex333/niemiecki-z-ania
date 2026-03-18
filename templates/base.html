@@ -8,7 +8,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- FONT (ładniejszy wygląd) -->
+    <!-- FONT -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
     <!-- CSS -->
@@ -21,14 +21,16 @@
     <header class="navbar">
         <div class="nav-container">
 
+            <!-- LOGO -->
             <a href="/" class="logo">
-                Niemiecki z Anią 🇩🇪
+                <img src="{% static 'images/logo.png' %}" alt="Niemiecki z Anią logo">
             </a>
 
+            <!-- MENU -->
             <nav class="nav-links">
                 <a href="/">Start</a>
                 <a href="/materialy/">Materiały</a>
-                <a href="/sklep/">Sklep</a>
+                <a href="/sklep/" class="btn-nav">Sklep</a>
                 <a href="/kontakt/">Kontakt</a>
             </nav>
 
@@ -45,16 +47,23 @@
     <footer class="footer">
         <div class="footer-container">
 
-            <div>
+            <div class="footer-col">
                 <h3>Niemiecki z Anią 🇩🇪</h3>
                 <p>Nauka niemieckiego w praktyczny i przyjemny sposób.</p>
             </div>
 
-            <div class="footer-links">
+            <div class="footer-col footer-links">
+                <h4>Linki</h4>
+                <a href="/">Start</a>
+                <a href="/materialy/">Materiały</a>
                 <a href="/sklep/">Sklep</a>
                 <a href="/kontakt/">Kontakt</a>
             </div>
 
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2026 Niemiecki z Anią. Wszystkie prawa zastrzeżone.</p>
         </div>
     </footer>
 
