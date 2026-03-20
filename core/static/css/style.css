@@ -22,7 +22,7 @@ body {
 .navbar {
     position: sticky;
     top: 0;
-    height: 95px;
+    height: 120px;
     background: linear-gradient(90deg, #1b5e20, #2e7d32);
     display: flex;
     align-items: center;
@@ -30,18 +30,24 @@ body {
     z-index: 1000;
 }
 
-/* 🔥 KLUCZ – LOGO DO LEWEJ */
+/* 🔥 NAV CONTAINER */
 .nav-container {
     width: 100%;
-    padding: 0 40px; /* ← zamiast margin auto */
+    padding: 0 40px;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
+    position: relative;
 }
 
-/* LOGO */
+/* 🟢 LOGO - LEWA */
+.logo {
+    position: absolute;
+    left: 40px;
+}
+
 .logo img {
-    height: 150px; 
+    height: 140px;
     display: block;
     transition: 0.3s;
 }
@@ -50,15 +56,15 @@ body {
     transform: scale(1.05);
 }
 
-/* NAV LINKS */
+/* 🔥 NAV LINKS (ŚRODEK) */
 .nav-links {
     display: flex;
     align-items: center;
+    gap: 35px;
 }
 
 .nav-links a {
     color: white;
-    margin-left: 30px;
     text-decoration: none;
     font-weight: 400;
     position: relative;
@@ -87,7 +93,6 @@ body {
     color: #1b5e20 !important;
     padding: 8px 18px;
     border-radius: 10px;
-    margin-left: 30px;
     font-weight: 600;
     transition: 0.3s;
 }
@@ -97,58 +102,100 @@ body {
     transform: translateY(-2px);
 }
 
+/* 🔵 SOCIALE - PRAWA */
+.nav-right {
+    position: absolute;
+    right: 40px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.social-link img {
+    width: 22px;
+    height: 22px;
+    filter: brightness(0) invert(1);
+    transition: 0.3s;
+}
+
+.social-link img:hover {
+    transform: scale(1.15);
+    opacity: 0.8;
+}
+
 /* 🔻 FOOTER */
 .footer {
     background: #1b5e20;
     color: white;
-    padding: 30px 0 10px; /* było 60 → za dużo */
-    margin-top: 40px;
+    padding: 18px 0 6px;
+    margin-top: 30px;
 }
 
+/* 🔥 CONTAINER */
 .footer-container {
     width: 90%;
     max-width: 1200px;
     margin: auto;
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 30px;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    min-height: 80px; /* 🔥 stabilna wysokość */
 }
 
-/* tekst */
+/* 🔥 ŚRODEK */
+.footer-col {
+    text-align: center;
+}
+
+.footer-col h3 {
+    margin-bottom: 5px;
+}
+
 .footer-col p {
     font-size: 14px;
     color: #c8e6c9;
 }
 
-/* linki */
+/* 🔥 SOCIAL */
+.socials {
+    margin-top: 6px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.socials img {
+    width: 22px;
+    height: 22px;
+    filter: brightness(0) invert(1);
+}
+
+/* 🔥 PRAWA (KLUCZ – WYŚRODKOWANIE PIONOWE) */
+.footer-links {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: right;
+}
+
 .footer-links a {
     display: block;
-    margin-bottom: 6px;
     font-size: 14px;
+    margin-bottom: 4px;
+    color: white;
+    text-decoration: none;
 }
 
 /* dół */
 .footer-bottom {
     text-align: center;
-    margin-top: 20px;
-    font-size: 13px;
+    margin-top: 10px;
+    font-size: 12px;
     opacity: 0.6;
 }
 
-/* 🔥 SOCIAL MEDIA */
-.socials img {
-    width: 24px;
-    height: 24px;
-    margin-right: 8px;
-    transition: 0.3s;
-    filter: brightness(0) invert(1);
-}
-
-.socials img:hover {
-    transform: scale(1.15);
-    opacity: 0.8;
-}
 /* 📱 MOBILE */
 @media (max-width: 768px) {
 
@@ -156,20 +203,38 @@ body {
         padding: 0 20px;
     }
 
+    .logo {
+        position: static;
+    }
+
     .logo img {
-        height: 60px;
+        height: 70px;
+    }
+
+    .nav-right {
+        position: static;
+        margin-left: auto;
     }
 
     .nav-links {
         display: none;
     }
 
+    /* 🔥 footer mobile */
     .footer-container {
         flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+
+    .footer-links {
+        position: static;
+        transform: none;
         text-align: center;
     }
 }
 
+/* 🔥 FULL HEIGHT */
 html, body {
     height: 100%;
 }
