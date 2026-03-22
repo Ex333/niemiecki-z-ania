@@ -1,249 +1,349 @@
-/* RESET */
+/* 🔥 RESET */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    font-family: 'Poppins', sans-serif;
-    background: #f9fbf9;
-    color: #222;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(180deg, #f9fbf9, #eef5ee);
+  color: #222;
+  line-height: 1.6;
 }
 
 /* 📦 CONTAINER */
-.main-content {
-    width: 90%;
-    max-width: 1200px;
-    margin: 60px auto;
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
 }
 
 /* 🔝 NAVBAR */
 .navbar {
-    position: sticky;
-    top: 0;
-    height: 120px;
-    background: linear-gradient(90deg, #1b5e20, #2e7d32);
-    display: flex;
-    align-items: center;
-    box-shadow: 0 6px 25px rgba(0,0,0,0.12);
-    z-index: 1000;
+  position: sticky;
+  top: 0;
+  height: 120px;
+  background: linear-gradient(90deg, #1b5e20, #2e7d32);
+  display: flex;
+  align-items: center;
+  z-index: 9999;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
 }
 
-/* 🔥 NAV CONTAINER */
+.navbar * {
+  position: relative;
+  z-index: 2;
+}
+
+/* 🔥 NAV GRID */
 .nav-container {
-    width: 100%;
-    padding: 0 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+  position: relative;
+
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
 }
 
-/* 🟢 LOGO - LEWA */
+/* 🟢 LOGO */
 .logo {
-    position: absolute;
-    left: 40px;
+  justify-self: start;
+  margin-left: -350px;
 }
 
 .logo img {
-    height: 140px;
-    display: block;
-    transition: 0.3s;
+  height: 150px;
+  object-fit: contain;
+  transform: translateY(-10px);
 }
 
-.logo img:hover {
-    transform: scale(1.05);
-}
-
-/* 🔥 NAV LINKS (ŚRODEK) */
+/* 🔥 MENU */
 .nav-links {
-    display: flex;
-    align-items: center;
-    gap: 35px;
+  display: flex;
+  justify-content: center;
+  gap: 35px;
 }
 
 .nav-links a {
-    color: white;
-    text-decoration: none;
-    font-weight: 400;
-    position: relative;
-    transition: 0.3s;
+  color: white;
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: 600;
+  transition: 0.3s;
 }
 
-/* underline animation */
-.nav-links a::after {
-    content: "";
-    position: absolute;
-    width: 0%;
-    height: 2px;
-    background: gold;
-    left: 0;
-    bottom: -6px;
-    transition: 0.3s;
+.nav-links a:hover {
+  color: gold;
 }
 
-.nav-links a:hover::after {
-    width: 100%;
-}
-
-/* 🔥 CTA button */
+/* 🟨 AKTYWNY */
 .btn-nav {
-    background: gold;
-    color: #1b5e20 !important;
-    padding: 8px 18px;
-    border-radius: 10px;
-    font-weight: 600;
-    transition: 0.3s;
+  background: gold;
+  color: #1b5e20 !important;
+  padding: 8px 16px;
+  border-radius: 10px;
 }
 
-.btn-nav:hover {
-    background: #ffd54f;
-    transform: translateY(-2px);
-}
-
-/* 🔵 SOCIALE - PRAWA */
+/* 🔵 SOCIAL */
 .nav-right {
-    position: absolute;
-    right: 40px;
-    display: flex;
-    align-items: center;
-    gap: 15px;
+  position: absolute;
+  right: -320px;
+  display: flex;
+  gap: 12px;
+}
+
+.social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  border-radius: 8px;
+  transition: 0.3s;
 }
 
 .social-link img {
-    width: 22px;
-    height: 22px;
-    filter: brightness(0) invert(1);
-    transition: 0.3s;
+  width: 20px;
+  height: 20px;
+  filter: brightness(0) invert(1);
 }
 
-.social-link img:hover {
-    transform: scale(1.15);
-    opacity: 0.8;
+.social-link:hover {
+  background: rgba(255,255,255,0.2);
+  transform: translateY(-2px);
+}
+
+/* 🍔 HAMBURGER */
+.hamburger {
+  display: none;
+  font-size: 30px;
+  color: white;
+  cursor: pointer;
+  justify-self: end;
+}
+
+/* 🔥 BUTTON GLOBAL */
+.btn {
+  background: linear-gradient(135deg, gold, #ffd54f);
+  color: #1b5e20;
+  padding: 12px 22px;
+  border-radius: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-block;
+  transition: 0.3s;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+}
+
+.btn.secondary {
+  background: white;
+}
+
+/* 🔵 HERO */
+.hero {
+  padding: 120px 0 80px;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: 48px;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+.hero p {
+  font-size: 18px;
+  max-width: 600px;
+  margin: 0 auto 30px;
+  color: #555;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+/* 📦 CARDS */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+  margin-top: 40px;
+}
+
+.card {
+  background: white;
+  padding: 25px;
+  border-radius: 18px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.12);
+}
+
+/* 📦 SECTIONS */
+section {
+  padding: 80px 0;
 }
 
 /* 🔻 FOOTER */
 .footer {
-    background: #1b5e20;
-    color: white;
-    padding: 18px 0 6px;
-    margin-top: 30px;
-}
-
-/* 🔥 CONTAINER */
-.footer-container {
-    width: 90%;
-    max-width: 1200px;
-    margin: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    min-height: 80px; /* 🔥 stabilna wysokość */
-}
-
-/* 🔥 ŚRODEK */
-.footer-col {
-    text-align: center;
-}
-
-.footer-col h3 {
-    margin-bottom: 5px;
-}
-
-.footer-col p {
-    font-size: 14px;
-    color: #c8e6c9;
-}
-
-/* 🔥 SOCIAL */
-.socials {
-    margin-top: 6px;
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-}
-
-.socials img {
-    width: 22px;
-    height: 22px;
-    filter: brightness(0) invert(1);
-}
-
-/* 🔥 PRAWA (KLUCZ – WYŚRODKOWANIE PIONOWE) */
-.footer-links {
-    position: absolute;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    text-align: right;
-}
-
-.footer-links a {
-    display: block;
-    font-size: 14px;
-    margin-bottom: 4px;
-    color: white;
-    text-decoration: none;
-}
-
-/* dół */
-.footer-bottom {
-    text-align: center;
-    margin-top: 10px;
-    font-size: 12px;
-    opacity: 0.6;
+  background: #1b5e20;
+  color: white;
+  padding: 25px 0;
+  margin-top: 50px;
+  text-align: center;
 }
 
 /* 📱 MOBILE */
-@media (max-width: 768px) {
+@media (max-width: 900px) {
 
-    .nav-container {
-        padding: 0 20px;
-    }
+  .logo {
+    margin-left: 0;
+  }
 
-    .logo {
-        position: static;
-    }
+  .logo img {
+    height: 100px;
+  }
 
-    .logo img {
-        height: 70px;
-    }
+  .hamburger {
+    display: block;
+  }
 
-    .nav-right {
-        position: static;
-        margin-left: auto;
-    }
+  .nav-right {
+    display: none;
+  }
 
-    .nav-links {
-        display: none;
-    }
+  .nav-links {
+    position: absolute;
+    top: 120px;
+    left: 0;
+    width: 100%;
+    background: #1b5e20;
 
-    /* 🔥 footer mobile */
-    .footer-container {
-        flex-direction: column;
-        text-align: center;
-        gap: 10px;
-    }
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 20px 0;
 
-    .footer-links {
-        position: static;
-        transform: none;
-        text-align: center;
-    }
+    display: none;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  .hero h1 {
+    font-size: 32px;
+  }
+
+  .cards {
+    grid-template-columns: 1fr;
+  }
+
+  .buttons {
+    flex-direction: column;
+  }
 }
 
 /* 🔥 FULL HEIGHT */
 html, body {
-    height: 100%;
+  height: 100%;
 }
 
 body {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .main-content {
-    flex: 1;
+  flex: 1;
+}
+
+/* ⭐ ABOUT WITH IMAGE */
+.about-wrapper {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 50px;
+    align-items: center;
+}
+
+.about-image img {
+    width: 100%;
+    border-radius: 20px;
+    box-shadow: 0 12px 35px rgba(0,0,0,0.15);
+    transition: 0.3s;
+}
+
+.about-image img:hover {
+    transform: scale(1.03);
+}
+
+.about-text h2 {
+    margin-bottom: 15px;
+}
+
+.about-text p {
+    margin-bottom: 25px;
+    font-size: 17px;
+}
+
+/* 📱 MOBILE */
+@media (max-width: 900px) {
+    .about-wrapper {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .about-image {
+        max-width: 250px;
+        margin: auto;
+    }
+}
+
+.about {
+    padding: 80px 0;
+}
+
+/* 🔥 TARGET SECTION WITH IMAGE */
+.target-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 50px;
+    align-items: center;
+}
+
+/* 🖼️ OBRAZEK */
+.target-image {
+    max-width: 320px;
+}
+
+.target-image img {
+    width: 100%;
+    border-radius: 20px;
+    box-shadow: 0 12px 35px rgba(0,0,0,0.15);
+    object-fit: cover;
+}
+
+/* 📱 MOBILE */
+@media (max-width: 900px) {
+    .target-wrapper {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .target-image {
+        margin: auto;
+    }
 }

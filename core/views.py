@@ -1,9 +1,11 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from .models import HomePage
 
 
 def home(request):
-    return render(request, "home.html")
+    homepage = HomePage.objects.first()
+    return render(request, 'home.html', {'homepage': homepage})
 
 
 def materialy(request):

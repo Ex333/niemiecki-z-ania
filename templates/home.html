@@ -1,40 +1,152 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block content %}
 
+<!-- 🔥 HERO -->
 <section class="hero">
-
     <div class="container">
 
-        <h1>Niemiecki z Anią 🇩🇪</h1>
+        <h1>
+            {{ homepage.title|default:"Niemiecki bez stresu 🇩🇪" }}
+        </h1>
 
         <p>
-            Nauka języka niemieckiego w prosty i skuteczny sposób.
-            Materiały, wskazówki i kursy dla każdego poziomu.
+            {{ homepage.subtitle|default:"Ucz się niemieckiego szybko i skutecznie – nawet od zera." }}
         </p>
 
+        <div class="buttons">
+            <a href="/materialy/" class="btn">
+                📘 Zobacz materiały
+            </a>
+
+            <a href="/kontakt/" class="btn secondary">
+                💬 Umów lekcję
+            </a>
+        </div>
+
+    </div>
+</section>
+
+<!-- 📦 OFERTA -->
+<section class="offer">
+    <div class="container">
+
+        <h2>{{ homepage.offer_title|default:"Co znajdziesz na stronie?" }}</h2>
+
+        <div class="cards">
+
+            <div class="card">
+                <h3>📘 Materiały PDF</h3>
+                <p>
+                    Gotowe pakiety do nauki – gramatyka, dialogi i praktyczne przykłady.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>💻 Lekcje online</h3>
+                <p>
+                    Indywidualne zajęcia dopasowane do Twojego poziomu i celów.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>🧠 Prosta nauka</h3>
+                <p>
+                    Bez skomplikowanej teorii – uczysz się tego, co naprawdę potrzebne.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<!-- 💬 DLA KOGO -->
+<section class="target">
+    <div class="container target-wrapper">
+
+        <!-- 📝 TEKST -->
+        <div class="target-text">
+            <h2>{{ homepage.target_title|default:"Dla kogo jest ta strona?" }}</h2>
+
+            <ul>
+                <li>✔️ Dla początkujących (A1–A2)</li>
+                <li>✔️ Dla osób mieszkających w Niemczech 🇩🇪</li>
+                <li>✔️ Dla tych, którzy chcą mówić bez stresu</li>
+            </ul>
+        </div>
+
+        <!-- 🖼️ ZDJĘCIE -->
+        <div class="target-image">
+            <img src="{% static 'images/ania1.jpeg' %}" alt="Nauka niemieckiego">
+        </div>
+
+    </div>
+</section>
+
+<!-- ⭐ O ANI -->
+<section class="about">
+    <div class="container about-wrapper">
+
+        <!-- 🖼️ ZDJĘCIE -->
+        <div class="about-image">
+            <img src="{% static 'images/ania.jpg' %}" alt="Ania - nauczycielka niemieckiego">
+        </div>
+
+        <!-- 📝 TEKST -->
+        <div class="about-text">
+            <h2>{{ homepage.about_title|default:"O mnie" }}</h2>
+
+            <p>
+                {{ homepage.about_text|default:"Pomagam Polakom nauczyć się niemieckiego w prosty i praktyczny sposób. Skupiam się na tym, co naprawdę przydaje się w życiu i pracy." }}
+            </p>
+
+            <a href="/kontakt/" class="btn secondary">
+                Umów lekcję
+            </a>
+        </div>
+
+    </div>
+</section>
+
+<!-- 🚀 CTA -->
+<section class="cta">
+    <div class="container">
+
+        <h2>{{ homepage.cta_title|default:"Zacznij naukę już dziś" }}</h2>
+
         <a href="/materialy/" class="btn">
-            Zobacz materiały
+            {{ homepage.cta_button|default:"Kup materiały" }}
         </a>
 
     </div>
-
 </section>
 
-
-<section class="about">
-
+<!-- 🔥 CTA 2 -->
+<section class="cta-bottom">
     <div class="container">
 
-        <h2>Dlaczego warto?</h2>
+        <h2>{{ homepage.cta2_title|default:"Chcesz mówić po niemiecku bez stresu?" }}</h2>
 
         <p>
-            Na tej stronie znajdziesz materiały do nauki niemieckiego,
-            wskazówki do egzaminów oraz praktyczne lekcje.
+            {{ homepage.cta2_text|default:"Umów pierwszą lekcję i zobacz jak szybko możesz robić postępy." }}
         </p>
 
-    </div>
+        <a href="/kontakt/" class="btn">
+            {{ homepage.cta2_button|default:"Umów lekcję" }}
+        </a>
 
+    </div>
 </section>
+
+<!-- 🧩 CKEDITOR -->
+{% if homepage.content %}
+<section class="custom-content">
+    <div class="container">
+        {{ homepage.content|safe }}
+    </div>
+</section>
+{% endif %}
 
 {% endblock %}
