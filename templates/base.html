@@ -19,34 +19,46 @@
 
     <!-- 🔝 NAVBAR -->
     <header class="navbar">
-        <div class="nav-container">
+    <div class="nav-container">
 
-            <!-- 🟢 LOGO (LEWA) -->
-            <a href="/" class="logo">
-                <img src="{% static 'images/logo.png' %}" alt="Logo">
-            </a>
+        <!-- 🟢 LOGO -->
+        <a href="/" class="logo">
+            <img src="{% static 'images/logo.png' %}" alt="Logo">
+        </a>
 
-            <!-- 🔥 MENU (ŚRODEK) -->
-            <nav class="nav-links">
-                <a href="/">Start</a>
-                <a href="/materialy/">Materiały</a>
-                <a href="/sklep/">Sklep</a>
-                <a href="/kontakt/">Kontakt</a>
-            </nav>
+        <!-- 🍔 HAMBURGER -->
+        <div class="hamburger" onclick="toggleMenu()">☰</div>
 
-            <!-- 🔵 SOCIALE (PRAWA) -->
+        <!-- 🔥 MENU -->
+        <nav class="nav-links">
+            <a href="/">Start</a>
+            <a href="/materialy/">Materiały</a>
+            <a href="/sklep/">Sklep</a>
+            <a href="/kontakt/">Kontakt</a>
+
+            <!-- 🔵 SOCIALE W MOBILE -->
             <div class="nav-right">
                 <a href="https://facebook.com" target="_blank" class="social-link">
                     <img src="{% static 'images/facebook-logo.png' %}" alt="Facebook">
                 </a>
-
                 <a href="https://instagram.com" target="_blank" class="social-link">
                     <img src="{% static 'images/instagram-logo.png' %}" alt="Instagram">
                 </a>
             </div>
+        </nav>
 
+        <!-- 🔵 SOCIALE DESKTOP -->
+        <div class="nav-right">
+            <a href="https://facebook.com" target="_blank" class="social-link">
+                <img src="{% static 'images/facebook-logo.png' %}" alt="Facebook">
+            </a>
+            <a href="https://instagram.com" target="_blank" class="social-link">
+                <img src="{% static 'images/instagram-logo.png' %}" alt="Instagram">
+            </a>
         </div>
-    </header>
+
+    </div>
+</header>
 
     <!-- 📦 CONTENT -->
     <main class="main-content">
@@ -56,38 +68,48 @@
 
     <!-- 🔻 FOOTER -->
     <footer class="footer">
-        <div class="footer-container">
+    <div class="container footer-grid">
 
-            <!-- LEWA KOLUMNA -->
-            <div class="footer-col">
-                <h3>Niemiecki z Anią 🇩🇪</h3>
-                <p>Nauka niemieckiego w praktyczny i przyjemny sposób.</p>
-
-                <div class="socials">
-                    <a href="https://facebook.com" target="_blank">
-                        <img src="{% static 'images/facebook-logo.png' %}" alt="Facebook">
-                    </a>
-
-                    <a href="https://instagram.com" target="_blank">
-                        <img src="{% static 'images/instagram-logo.png' %}" alt="Instagram">
-                    </a>
-                </div>
-            </div>
-
-            <!-- PRAWA KOLUMNA -->
-            <div class="footer-col footer-links">
-                <a href="/">Start</a>
-                <a href="/materialy/">Materiały</a>
-                <a href="/sklep/">Sklep</a>
-                <a href="/kontakt/">Kontakt</a>
-            </div>
-
+        <!-- 🟢 LEFT -->
+        <div class="footer-brand">
+            <h3>Niemiecki z Anią 🇩🇪</h3>
+            <p>Nauka niemieckiego w praktyczny i przyjemny sposób.</p>
         </div>
 
-        <div class="footer-bottom">
-            <p>© 2026 Niemiecki z Anią. Wszystkie prawa zastrzeżone.</p>
+        <!-- 🔗 MIDDLE -->
+        <div class="footer-nav">
+            <h4>Nawigacja</h4>
+            <a href="/">Start</a>
+            <a href="/materialy/">Materiały</a>
+            <a href="/sklep/">Sklep</a>
+            <a href="/kontakt/">Kontakt</a>
         </div>
-    </footer>
+
+        <!-- ⚖️ RIGHT -->
+        <div class="footer-legal">
+            <h4>Informacje</h4>
+            <a href="/impressum/">Impressum</a>
+            <a href="/privacy/">Polityka prywatności</a>
+        </div>
+
+    </div>
+
+    <!-- 🔻 BOTTOM -->
+    <div class="footer-bottom">
+        <div class="footer-social">
+            <a href="#"><img src="{% static 'images/facebook-logo.png' %}"></a>
+            <a href="#"><img src="{% static 'images/instagram-logo.png' %}"></a>
+        </div>
+
+        <p>© 2026 Niemiecki z Anią. Wszystkie prawa zastrzeżone.</p>
+    </div>
+</footer>
 
 </body>
 </html>
+
+<script>
+function toggleMenu() {
+    document.querySelector(".nav-links").classList.toggle("active");
+}
+</script>

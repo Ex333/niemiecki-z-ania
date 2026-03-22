@@ -1,5 +1,35 @@
 {% extends "base.html" %}
 
 {%block content%}
+<section class="contact">
+  <div class="container contact-wrapper">
 
+    <div class="contact-text">
+      <h2>Masz pytania? Chcesz zacząć naukę?</h2>
+
+      <p>
+        Napisz do mnie i umów się na pierwszą lekcję 👇  
+        Odpowiem jak najszybciej i dopasujemy naukę do Twojego poziomu.
+      </p>
+
+      <ul>
+        <li>✔️ Lekcje 1:1 online</li>
+        <li>✔️ Nauka od podstaw (A1–A2)</li>
+        <li>✔️ Praktyczny niemiecki do życia w DE 🇩🇪</li>
+      </ul>
+    </div>
+
+    <!-- FORM -->
+    <form class="contact-form">
+      <input type="text" placeholder="Twoje imię" required>
+      <input type="email" placeholder="Twój email" required>
+      <textarea placeholder="Twoja wiadomość..." required></textarea>
+
+      <button type="submit" class="btn">
+        📩 Wyślij wiadomość
+      </button>
+    </form>
+
+  </div>
+</section>
 {% endblock%}

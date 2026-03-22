@@ -23,7 +23,7 @@ body {
 .navbar {
   position: sticky;
   top: 0;
-  height: 120px;
+  height: 100px;
   background: linear-gradient(90deg, #1b5e20, #2e7d32);
   display: flex;
   align-items: center;
@@ -31,46 +31,38 @@ body {
   box-shadow: 0 6px 20px rgba(0,0,0,0.15);
 }
 
-.navbar * {
-  position: relative;
-  z-index: 2;
-}
-
 /* 🔥 NAV GRID */
 .nav-container {
   width: 90%;
   max-width: 1200px;
   margin: auto;
-  position: relative;
 
   display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  grid-template-columns: auto 1fr auto;
   align-items: center;
 }
 
 /* 🟢 LOGO */
 .logo {
   justify-self: start;
-  margin-left: -350px;
 }
 
 .logo img {
-  height: 150px;
+  height: 110px;
   object-fit: contain;
-  transform: translateY(-10px);
 }
 
 /* 🔥 MENU */
 .nav-links {
   display: flex;
-  justify-content: center;
+  justify-self: center;
   gap: 35px;
 }
 
 .nav-links a {
   color: white;
   text-decoration: none;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 600;
   transition: 0.3s;
 }
@@ -79,52 +71,37 @@ body {
   color: gold;
 }
 
-/* 🟨 AKTYWNY */
-.btn-nav {
-  background: gold;
-  color: #1b5e20 !important;
-  padding: 8px 16px;
-  border-radius: 10px;
-}
-
-/* 🔵 SOCIAL */
+/* 🔵 SOCIAL (DESKTOP) */
 .nav-right {
-  position: absolute;
-  right: -320px;
+  justify-self: end;
   display: flex;
   gap: 12px;
 }
 
-.social-link {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 6px;
-  border-radius: 8px;
+.social-link img {
+  width: 20px;
+  filter: brightness(0) invert(1);
   transition: 0.3s;
 }
 
-.social-link img {
-  width: 20px;
-  height: 20px;
-  filter: brightness(0) invert(1);
+.social-link:hover img {
+  transform: scale(1.1);
 }
 
-.social-link:hover {
-  background: rgba(255,255,255,0.2);
-  transform: translateY(-2px);
+/* ❗ UKRYJ DUPLIKATY W MENU NA DESKTOP */
+.nav-links .nav-right {
+  display: none;
 }
 
 /* 🍔 HAMBURGER */
 .hamburger {
   display: none;
-  font-size: 30px;
+  font-size: 28px;
   color: white;
   cursor: pointer;
-  justify-self: end;
 }
 
-/* 🔥 BUTTON GLOBAL */
+/* 🔥 BUTTON */
 .btn {
   background: linear-gradient(135deg, gold, #ffd54f);
   color: #1b5e20;
@@ -150,12 +127,12 @@ body {
 .hero {
   padding: 120px 0 80px;
   text-align: center;
+  background: radial-gradient(circle at top, #c8e6c9, #f9fbf9);
 }
 
 .hero h1 {
   font-size: 48px;
   margin-bottom: 20px;
-  font-weight: 700;
 }
 
 .hero p {
@@ -197,28 +174,90 @@ section {
   padding: 80px 0;
 }
 
+/* ⭐ ABOUT */
+.about-wrapper {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 50px;
+  align-items: center;
+}
+
+.about-image img {
+  width: 100%;
+  border-radius: 20px;
+  box-shadow: 0 12px 35px rgba(0,0,0,0.15);
+}
+
+.about-text p {
+  margin-bottom: 20px;
+}
+
+/* 🔥 TARGET */
+.target-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 50px;
+  align-items: center;
+}
+
+.target-image img {
+  width: 100%;
+  border-radius: 20px;
+  box-shadow: 0 12px 35px rgba(0,0,0,0.15);
+  object-fit: cover;
+}
+
 /* 🔻 FOOTER */
 .footer {
-  background: #1b5e20;
+  background: linear-gradient(135deg, #1b5e20, #2e7d32);
   color: white;
-  padding: 25px 0;
-  margin-top: 50px;
+  padding: 60px 0 30px;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 40px;
+}
+
+.footer a {
+  color: #dfeee0;
+  text-decoration: none;
+}
+
+.footer a:hover {
+  color: gold;
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.2);
+  padding-top: 20px;
   text-align: center;
+}
+
+.footer-social {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 10px;
+}
+
+.footer-social img {
+  width: 24px;
+  filter: brightness(0) invert(1);
 }
 
 /* 📱 MOBILE */
 @media (max-width: 900px) {
 
-  .logo {
-    margin-left: 0;
-  }
-
-  .logo img {
-    height: 100px;
+  .nav-container {
+    grid-template-columns: auto auto;
   }
 
   .hamburger {
     display: block;
+    justify-self: end;
   }
 
   .nav-right {
@@ -227,21 +266,28 @@ section {
 
   .nav-links {
     position: absolute;
-    top: 120px;
+    top: 100px;
     left: 0;
     width: 100%;
-    background: #1b5e20;
+    background: linear-gradient(180deg, #1b5e20, #2e7d32);
 
     flex-direction: column;
     align-items: center;
     gap: 20px;
-    padding: 20px 0;
+    padding: 25px 0;
 
     display: none;
+    z-index: 9999;
   }
 
   .nav-links.active {
     display: flex;
+  }
+
+  /* social inside dropdown */
+  .nav-links .nav-right {
+    display: flex;
+    margin-top: 10px;
   }
 
   .hero h1 {
@@ -254,6 +300,23 @@ section {
 
   .buttons {
     flex-direction: column;
+  }
+
+  .about-wrapper,
+  .target-wrapper {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .about-image,
+  .target-image {
+    max-width: 250px;
+    margin: auto;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
   }
 }
 
@@ -271,79 +334,73 @@ body {
   flex: 1;
 }
 
-/* ⭐ ABOUT WITH IMAGE */
-.about-wrapper {
-    display: grid;
-    grid-template-columns: 320px 1fr;
-    gap: 50px;
-    align-items: center;
+/* 🔥 CONTACT SECTION */
+.contact {
+  padding: 80px 0;
+  background: #f9fbf9;
 }
 
-.about-image img {
-    width: 100%;
-    border-radius: 20px;
-    box-shadow: 0 12px 35px rgba(0,0,0,0.15);
-    transition: 0.3s;
+.contact-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  align-items: center;
 }
 
-.about-image img:hover {
-    transform: scale(1.03);
+/* 📝 TEXT */
+.contact-text h2 {
+  margin-bottom: 15px;
+  font-size: 32px;
 }
 
-.about-text h2 {
-    margin-bottom: 15px;
+.contact-text p {
+  margin-bottom: 20px;
+  color: #555;
 }
 
-.about-text p {
-    margin-bottom: 25px;
-    font-size: 17px;
+.contact-text ul {
+  list-style: none;
 }
 
-/* 📱 MOBILE */
-@media (max-width: 900px) {
-    .about-wrapper {
-        grid-template-columns: 1fr;
-        text-align: center;
-    }
-
-    .about-image {
-        max-width: 250px;
-        margin: auto;
-    }
+.contact-text li {
+  margin-bottom: 10px;
 }
 
-.about {
-    padding: 80px 0;
+/* 📩 FORM */
+.contact-form {
+  background: white;
+  padding: 30px;
+  border-radius: 18px;
+  box-shadow: 0 12px 35px rgba(0,0,0,0.08);
+
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
-/* 🔥 TARGET SECTION WITH IMAGE */
-.target-wrapper {
-    display: grid;
-    grid-template-columns: 1fr 320px;
-    gap: 50px;
-    align-items: center;
+.contact-form input,
+.contact-form textarea {
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  font-family: inherit;
+  font-size: 14px;
+  transition: 0.2s;
 }
 
-/* 🖼️ OBRAZEK */
-.target-image {
-    max-width: 320px;
+.contact-form textarea {
+  min-height: 120px;
+  resize: none;
 }
 
-.target-image img {
-    width: 100%;
-    border-radius: 20px;
-    box-shadow: 0 12px 35px rgba(0,0,0,0.15);
-    object-fit: cover;
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: #2e7d32;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(46,125,50,0.15);
 }
 
-/* 📱 MOBILE */
-@media (max-width: 900px) {
-    .target-wrapper {
-        grid-template-columns: 1fr;
-        text-align: center;
-    }
-
-    .target-image {
-        margin: auto;
-    }
+.contact-form button {
+  margin-top: 10px;
+  cursor: pointer;
 }
