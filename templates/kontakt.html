@@ -20,10 +20,11 @@
     </div>
 
     <!-- FORM -->
-    <form class="contact-form">
-      <input type="text" placeholder="Twoje imię" required>
-      <input type="email" placeholder="Twój email" required>
-      <textarea placeholder="Twoja wiadomość..." required></textarea>
+    <form method="POST" class="contact-form">
+      {% csrf_token %}
+      <input type="text" name="name" placeholder="Twoje imię" required>
+      <input type="email" name="email" placeholder="Twój email" required>
+      <textarea name="message" placeholder="Twoja wiadomość..." required></textarea>
 
       <button type="submit" class="btn">
         📩 Wyślij wiadomość
