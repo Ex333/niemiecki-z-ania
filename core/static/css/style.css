@@ -125,11 +125,27 @@ body {
 
 /* 🔵 HERO */
 .hero {
-  padding: 120px 0 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* 🔥 pionowe centrowanie */
+  align-items: center;     /* 🔥 poziome centrowanie */
+
+  min-height: 80vh; /* 🔥 zamiast padding 500px */
   text-align: center;
-  background: radial-gradient(circle at top, #c8e6c9, #f9fbf9);
+  padding: 40px 20px;
+
+  background:
+    linear-gradient(rgba(20, 80, 40, 0.65), rgba(20, 80, 40, 0.65)),
+    url('/static/images/hero.jpg');
+
+  background-size: cover;
+  background-position: center bottom; /* 🔥 pokazuje dół (doniczka) */
+  background-repeat: no-repeat;
+
+  color: white;
 }
 
+/* 🧠 Tekst */
 .hero h1 {
   font-size: 48px;
   margin-bottom: 20px;
@@ -139,13 +155,15 @@ body {
   font-size: 18px;
   max-width: 600px;
   margin: 0 auto 30px;
-  color: #555;
+  color: rgba(255,255,255,0.85);
 }
 
+/* 🔘 Przyciski */
 .buttons {
   display: flex;
   justify-content: center;
   gap: 15px;
+  flex-wrap: wrap; /* 🔥 mobile fix */
 }
 
 /* 📦 CARDS */
@@ -168,7 +186,6 @@ body {
   transform: translateY(-6px);
   box-shadow: 0 18px 40px rgba(0,0,0,0.12);
 }
-
 /* 📦 SECTIONS */
 section {
   padding: 80px 0;
@@ -458,4 +475,84 @@ body {
 .thank-you-box p {
     margin-bottom: 20px;
     color: #555;
+}
+
+/* =========================
+   🔥 CTA WRAPPER (PREMIUM)
+   ========================= */
+
+.cta-wrapper {
+  padding: 100px 20px;
+
+  background:
+    linear-gradient(135deg, rgba(26,77,46,0.85), rgba(47,122,69,0.85)),
+    url('/static/images/noise.jpg');
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  color: white;
+  text-align: center;
+}
+
+/* =========================
+   🧱 WEWNĘTRZNE SEKCJE (JUŻ BEZ TŁA)
+   ========================= */
+
+.cta,
+.cta-bottom {
+  background: none;
+  padding: 40px 20px;
+}
+
+/* spacing między nimi */
+.cta-bottom {
+  margin-top: 30px;
+  padding-bottom: 60px;
+}
+
+/* =========================
+   🧠 TEKST
+   ========================= */
+
+.cta h2,
+.cta-bottom h2 {
+  font-size: 32px;
+  margin-bottom: 15px;
+}
+
+.cta-bottom p {
+  font-size: 18px;
+  margin-bottom: 25px;
+  color: rgba(255,255,255,0.9);
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* =========================
+   🔘 BUTTON (LEKKI UPGRADE)
+   ========================= */
+
+.cta-wrapper .btn {
+  background: #ffd54f;
+  color: #1f5e35;
+  padding: 14px 28px;
+  border-radius: 12px;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.cta-wrapper .btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+}
+
+/* =========================
+   🔻 PŁYNNE PRZEJŚCIE DO FOOTERA
+   ========================= */
+
+.footer {
+  background: linear-gradient(135deg, #174a1a, #256b2a);
 }

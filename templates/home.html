@@ -110,34 +110,39 @@
     </div>
 </section>
 
-<!-- 🚀 CTA -->
-<section class="cta">
-    <div class="container">
+<!-- 🔥 CTA WRAPPER (JEDNA SEKCA) -->
+<section class="cta-wrapper">
 
-        <h2>{{ homepage.cta_title|default:"Zacznij naukę już dziś" }}</h2>
+    <!-- 🚀 CTA -->
+    <div class="cta">
+        <div class="container">
 
-        <a href="/sklep/" class="btn">
-            {{ homepage.cta_button|default:"Kup materiały" }}
-        </a>
+            <h2>{{ homepage.cta_title|default:"Zacznij naukę już dziś" }}</h2>
 
+            <a href="/sklep/" class="btn">
+                {{ homepage.cta_button|default:"Kup materiały" }}
+            </a>
+
+        </div>
     </div>
-</section>
 
-<!-- 🔥 CTA 2 -->
-<section class="cta-bottom">
-    <div class="container">
+    <!-- 🔥 CTA 2 -->
+    <div class="cta-bottom">
+        <div class="container">
 
-        <h2>{{ homepage.cta2_title|default:"Chcesz mówić po niemiecku bez stresu?" }}</h2>
+            <h2>{{ homepage.cta2_title|default:"Chcesz mówić po niemiecku bez stresu?" }}</h2>
 
-        <p>
-            {{ homepage.cta2_text|default:"Umów pierwszą lekcję i zobacz jak szybko możesz robić postępy." }}
-        </p>
+            <p>
+                {{ homepage.cta2_text|default:"Umów pierwszą lekcję i zobacz jak szybko możesz robić postępy." }}
+            </p>
 
-        <a href="/kontakt/" class="btn">
-            {{ homepage.cta2_button|default:"Umów lekcję" }}
-        </a>
+            <a href="/kontakt/" class="btn">
+                {{ homepage.cta2_button|default:"Umów lekcję" }}
+            </a>
 
+        </div>
     </div>
+
 </section>
 
 <!-- 🧩 CKEDITOR -->
