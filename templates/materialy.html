@@ -1,5 +1,72 @@
 {% extends "base.html" %}
 
-{%block content%}
+{% block content %}
 
-{% endblock%}
+<div class="materials-container">
+
+    <h1 class="materials-title">📚 Materiały do nauki</h1>
+
+    <!-- 🔥 TOP BAR -->
+    <div class="materials-top">
+
+        <!-- 🔥 KATEGORIE -->
+        <div class="categories">
+
+            <a href="{% url 'material_list' %}"
+               class="btn-wszystkie {% if not active_category %}active{% endif %}">
+                Wszystkie
+            </a>
+
+            {% for cat in categories %}
+                <a href="{% url 'material_by_category' cat.slug %}"
+                   class="btn-wszystkie {% if active_category == cat %}active{% endif %}">
+                    {{ cat.name }}
+                </a>
+            {% endfor %}
+
+        </div>
+
+        <!-- 🔥 SEARCH -->
+        <form method="GET" class="search-form">
+            <input 
+                type="text" 
+                name="search" 
+                placeholder="Szukaj materiałów..."
+                value="{{ request.GET.search }}"
+                class="search-input"
+            >
+            <button type="submit" class="search-btn">
+                🔍
+            </button>
+        </form>
+
+    </div>
+
+    <!-- 🔥 GRID -->
+    <div class="materials-grid">
+
+        {% for material in materials %}
+            <div class="material-card">
+
+                <h3>{{ material.title }}</h3>
+
+                <p>{{ material.description|truncatewords:12 }}</p>
+
+                <p class="material-category">
+                    {{ material.category.name }}
+                </p>
+
+                <a href="{% url 'material_detail' material.slug %}" class="btn-red">
+                    👉 Zobacz materiał
+                </a>
+
+            </div>
+        {% empty %}
+            <p>Brak materiałów</p>
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}

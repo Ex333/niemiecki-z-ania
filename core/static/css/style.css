@@ -556,3 +556,258 @@ body {
 .footer {
   background: linear-gradient(135deg, #174a1a, #256b2a);
 }
+
+/* MATERIAŁYY */
+/* 🔥 CONTAINER */
+.materials-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 30px 20px;
+}
+
+/* 🔥 TITLE */
+.materials-title {
+    margin-bottom: 20px;
+}
+
+/* 🔥 KATEGORIE */
+.categories {
+    margin-bottom: 20px;
+}
+
+.category-link {
+    display: inline-block;
+    padding: 8px 14px;
+    border-radius: 20px;
+    background: #eee;
+    margin-right: 10px;
+    text-decoration: none;
+    color: #333;
+    transition: 0.2s;
+}
+
+.category-link:hover {
+    background: #2e7d32;
+    color: white;
+}
+
+.category-link.active {
+    background: #2e7d32;
+    color: white;
+}
+
+/* 🔥 GRID */
+.materials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+}
+
+/* 🔥 CARD */
+.material-card {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transition: 0.3s;
+}
+
+.material-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+/* 🔥 CATEGORY TEXT */
+.material-category {
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+/* 🔥 LINK */
+.material-link {
+    display: inline-block;
+    margin-top: 10px;
+    color: #2e7d32;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+
+/* 🔥 ŻÓŁTY BUTTON W Materials */
+.btn-wszystkie {
+    display: inline-block;
+    padding: 12px 22px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #ffd54f, #ffca28);
+    color: #1b5e20;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.25s ease;
+    box-shadow: 0 6px 18px rgba(255, 202, 40, 0.4);
+}
+
+/* 🔥 HOVER */
+.btn-wszystkie:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(255, 202, 40, 0.6);
+}
+
+/* 🔥 ACTIVE */
+.btn-wszystkie.active {
+    background: linear-gradient(135deg, #ffca28, #ffb300);
+}
+
+.search-form {
+    margin: 20px 0;
+    display: flex;
+    gap: 10px;
+}
+
+.search-input {
+    padding: 12px 15px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    width: 250px;
+    font-size: 14px;
+}
+
+.search-btn {
+    padding: 12px 18px;
+    border-radius: 10px;
+    border: none;
+    background: #2e7d32;
+    color: white;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.search-btn:hover {
+    background: #1b5e20;
+}
+
+/* =========================
+   📚 MATERIAL BUTTON FIXES
+   ========================= */
+
+/* 🔴 ZOBACZ MATERIAŁ */
+.btn-red {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 16px;
+    border-radius: 10px;
+    background: #e53935;
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.btn-red:hover {
+    background: #c62828;
+    transform: translateY(-2px);
+}
+
+/* 📥 DOWNLOAD BUTTON */
+.btn-download {
+    display: inline-block;
+    padding: 12px 22px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #ffd54f, #ffca28);
+    color: #1b5e20;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.25s;
+    box-shadow: 0 6px 18px rgba(255, 202, 40, 0.4);
+}
+
+.btn-download:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(255, 202, 40, 0.6);
+}
+
+/* ⬅ BACK BUTTON */
+.btn-back {
+    display: inline-block;
+    padding: 12px 18px;
+    border-radius: 12px;
+    background: #f1f1f1;
+    color: #333;
+    text-decoration: none;
+    font-weight: 500;
+    transition: 0.2s;
+}
+
+.btn-back:hover {
+    background: #ddd;
+}
+
+/* 🔥 ACTIONS WRAPPER */
+.material-actions {
+    margin-top: 20px;
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+/* =========================
+   📄 MATERIAL DETAIL PAGE
+   ========================= */
+
+.material-detail-card {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    max-width: 700px;
+}
+
+.material-title {
+    font-size: 32px;
+    margin-bottom: 15px;
+}
+
+.material-description {
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.material-category {
+    font-weight: 600;
+    margin-bottom: 25px;
+}
+
+/* =========================
+   📄 PDF PREVIEW
+   ========================= */
+
+/* 🔥 PDF PREVIEW */
+.pdf-preview {
+    margin-top: 25px;
+}
+
+/* 🔥 iframe */
+.pdf-frame {
+    width: 100%;
+    height: 700px; /* 🔥 WIĘKSZY */
+    border: none;
+    border-radius: 15px;
+    background: #f3f3f3;
+}
+
+/* 🔥 fallback */
+.pdf-fallback {
+    text-align: center;
+    margin-top: 12px;
+    font-size: 14px;
+    color: #666;
+}
+
+.pdf-fallback a {
+    color: #2e7d32;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.pdf-fallback a:hover {
+    text-decoration: underline;
+}

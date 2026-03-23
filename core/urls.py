@@ -1,12 +1,14 @@
 from django.urls import path
-from .views import home, materialy, kontakt
-from core import views
-
+from . import views
 
 urlpatterns = [
-    path("", home, name="home"),
-    path("materialy/", materialy, name="materialy"),
-    path("kontakt/", kontakt, name="kontakt"),
+    path("", views.home, name="home"),
+    path("kontakt/", views.kontakt, name="kontakt"),
     path("dziekuje/", views.dziekuje, name="dziekuje"),
+
+    # 🔥 MATERIAŁY
+    path("materialy/", views.material_list, name="material_list"),
+    path("materialy/kategoria/<slug:slug>/", views.material_by_category, name="material_by_category"),
+    path("materialy/<slug:slug>/", views.material_detail, name="material_detail"),
 ]
 

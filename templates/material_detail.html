@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="materials-container">
+
+    <div class="material-detail-card">
+
+        <h1 class="material-title">
+            {{ material.title }}
+        </h1>
+
+        <p class="material-description">
+            {{ material.description }}
+        </p>
+
+        <p class="material-category">
+            📂 {{ material.category.name }}
+        </p>
+
+        <!-- 🔥 PDF PREVIEW (TYLKO GOOGLE) -->
+        <div class="pdf-preview">
+
+            <iframe 
+                src="https://docs.google.com/gview?url={{ pdf_url }}&embedded=true"
+                class="pdf-frame">
+            </iframe>
+
+            <!-- fallback tylko tekst -->
+            <p class="pdf-fallback">
+                📄 Podgląd może nie działać lokalnie — 
+                <a href="{{ material.pdf.url }}" target="_blank">
+                    Otwórz PDF
+                </a>
+            </p>
+
+        </div>
+
+        <!-- 🔥 BUTTONY -->
+        <div class="material-actions">
+
+            <a href="{{ material.pdf.url }}" target="_blank" class="btn-download">
+                📥 Pobierz materiał
+            </a>
+
+            <a href="{% url 'material_list' %}" class="btn-back">
+                ⬅ Wróć
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
