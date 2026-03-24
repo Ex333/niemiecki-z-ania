@@ -811,3 +811,35 @@ body {
 .pdf-fallback a:hover {
     text-decoration: underline;
 }
+
+/* 🔥 PAGINACJA */
+.pagination {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+/* 🔘 BUTTONY */
+.page-btn {
+    background: #2e7d32;
+    color: white;
+    padding: 10px 16px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+.page-btn:hover {
+    background: #1b5e20;
+    transform: scale(1.05);
+}
+
+/* 📄 INFO */
+.page-info {
+    font-weight: bold;
+    color: #2e7d32;
+    font-size: 16px;
+}

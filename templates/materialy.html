@@ -45,7 +45,7 @@
     <!-- 🔥 GRID -->
     <div class="materials-grid">
 
-        {% for material in materials %}
+        {% for material in page_obj %}
             <div class="material-card">
 
                 <h3>{{ material.title }}</h3>
@@ -64,6 +64,27 @@
         {% empty %}
             <p>Brak materiałów</p>
         {% endfor %}
+
+    </div>
+
+    <!-- 🔥 PAGINACJA -->
+    <div class="pagination">
+
+        {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}" class="page-btn">
+                ←
+            </a>
+        {% endif %}
+
+        <span class="page-info">
+            {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}" class="page-btn">
+                →
+            </a>
+        {% endif %}
 
     </div>
 
