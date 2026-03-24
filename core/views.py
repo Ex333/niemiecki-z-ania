@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from .models import HomePage, Category, Material
 from .forms import ContactForm
 from django.db.models import Q
+from django.core.paginator import Paginator
 
 
 def home(request):
@@ -40,8 +41,12 @@ def material_list(request):
             Q(category__name__icontains=search_query)
         )
 
+    paginator = Paginator(materials, 9)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+
     return render(request, "materialy.html", {
-        "materials": materials,
+        "page_obj": page_obj,
         "categories": categories,
     })
 
