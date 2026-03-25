@@ -1,6 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import Product
 
 def sklep(request):
-    products = Product.objects.all()
-    return render(request, "sklep.html", {"products": products})
+    products = Product.objects.filter(available=True)
+    return render(request, "shop/sklep.html", {"products": products})
+
+def product_detail(request, slug):
+    product = get_object_or_404(Product, slug=slug , available=True)
+    return render(request, "shop/product_detail.html ", {"product": product})
