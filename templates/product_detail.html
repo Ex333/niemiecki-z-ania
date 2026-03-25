@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+
+  <div class="product-detail">
+
+    <!-- 🖼️ IMAGE -->
+    <div class="product-image">
+      {% if product.image %}
+        <img src="{{ product.image.url }}">
+      {% endif %}
+    </div>
+
+    <!-- 🧠 INFO -->
+    <div class="product-info">
+
+      <h1>{{ product.name }}</h1>
+
+      <div class="product-price">
+        {{ product.price }} zł
+      </div>
+
+      <div class="product-description">
+        {{ product.description }}
+      </div>
+
+      <!-- 🔥 CTA -->
+      <div class="product-actions">
+
+        <a href="mailto:niemieckizania87@gmail.com?subject=Zamówienie {{ product.name }}" class="btn">
+          Zamów przez email
+        </a>
+
+      </div>
+
+      <!-- 📦 INSTRUKCJA -->
+      <div class="order-box">
+
+        <h3>Jak zamówić?</h3>
+
+        <ol>
+          <li>Wyślij email na: <b>niemieckizania87@gmail.com</b></li>
+          <li>W tytule wpisz nazwę pakietu</li>
+          <li>Opłać zamówienie (PayPal lub przelew)</li>
+          <li>Po zaksięgowaniu otrzymasz plik PDF</li>
+        </ol>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+{% endblock %}
