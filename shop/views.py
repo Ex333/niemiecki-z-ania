@@ -3,8 +3,8 @@ from .models import Product
 
 def sklep(request):
     products = Product.objects.filter(available=True)
-    return render(request, "sklep.html", {"products": products})
+    return render(request, "shop/sklep.html", {"products": products})
 
 def product_detail(request, slug):
     product = get_object_or_404(Product, slug=slug , available=True)
-    return render(request, "product_detail.html ", {"product": product})
+    return render(request, "shop/product_detail.html ", {"product": product})

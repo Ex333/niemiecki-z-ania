@@ -901,6 +901,48 @@ body {
         text-align: center;
     }
 }
+/* =========================
+   🛍️ PRODUCT DETAIL GRID
+   ========================= */
+
+.product-detail-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: start;
+    margin-top: 40px;
+}
+
+/* 🖼️ IMAGE */
+.product-detail-image img {
+    width: 100%;
+    border-radius: 20px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+}
+
+/* 🧠 INFO */
+.product-detail-info h1 {
+    margin-bottom: 10px;
+}
+
+.product-detail-info .product-price {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #2e7d32;
+}
+
+.product-detail-info .product-description {
+    margin-bottom: 20px;
+    color: #444;
+}
+
+/* 📱 MOBILE */
+@media (max-width: 900px) {
+    .product-detail-container {
+        grid-template-columns: 1fr;
+    }
+}
 
 /* =========================
    🛍️ SHOP GRID
