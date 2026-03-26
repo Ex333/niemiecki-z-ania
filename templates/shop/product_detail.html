@@ -2,8 +2,7 @@
 
 {% block content %}
 
-<<<<<<< HEAD
-<div class="container">  <!-- 🔥 NOWE -->
+<div class="container">
 
   <div class="product-detail-container">
 
@@ -20,7 +19,7 @@
       <h1>{{ product.name }}</h1>
 
       <div class="product-price">
-        {{ product.price }} zł
+        {{ product.price }} PLN
       </div>
 
       <p class="product-description">
@@ -31,62 +30,46 @@
         Zamów przez email
       </a>
 
+      <!-- 🔥 NOWA INSTRUKCJA -->
       <div class="order-box">
         <h3>Jak zamówić?</h3>
 
         <ol>
-          <li>Wyślij email na: <b>niemieckizania87@gmail.com</b></li>
-          <li>W tytule wpisz nazwę pakietu</li>
-          <li>Opłać zamówienie (PayPal lub przelew)</li>
-          <li>Po zaksięgowaniu otrzymasz plik PDF</li>
+          <li>
+            Wyślij email na:
+            <b>niemieckizania87@gmail.com</b>
+          </li>
+
+          <li>
+            W tytule wpisz:
+            <b>{{ product.name }}</b>
+          </li>
+
+          <li>
+            Opłać zamówienie:
+            <br><br>
+
+            💳 <b>PayPal:</b> niemieckizania87@gmail.com  
+            <br>
+            🏦 <b>Przelew bankowy:</b><br>
+            PL30 1940 1076 4932 6007 0000 0000
+
+            <br><br>
+            👉 W tytule przelewu wpisz:
+            <br>
+            <b>Twoje imię + {{ product.name }}</b>
+          </li>
+
+          <li>
+            Po zaksięgowaniu otrzymasz plik PDF na email 📩
+          </li>
         </ol>
       </div>
 
-=======
-<div class="product-detail-container">
-
-  <!-- 🖼️ LEFT -->
-  <div class="product-detail-image">
-    {% if product.image %}
-      <img src="{{ product.image.url }}" alt="{{ product.name }}">
-    {% endif %}
-  </div>
-
-  <!-- 🧠 RIGHT -->
-  <div class="product-detail-info">
-
-    <h1>{{ product.name }}</h1>
-
-    <div class="product-price">
-      {{ product.price }} zł
-    </div>
-
-    <p class="product-description">
-      {{ product.description }}
-    </p>
-
-    <a href="mailto:niemieckizania87@gmail.com?subject=Zamówienie {{ product.name }}" class="btn">
-      Zamów przez email
-    </a>
-
-    <div class="order-box">
-      <h3>Jak zamówić?</h3>
-
-      <ol>
-        <li>Wyślij email na: <b>niemieckizania87@gmail.com</b></li>
-        <li>W tytule wpisz nazwę pakietu</li>
-        <li>Opłać zamówienie (PayPal lub przelew)</li>
-        <li>Po zaksięgowaniu otrzymasz plik PDF</li>
-      </ol>
->>>>>>> 425f8fa3932ae8c6495665bcd5712751a1e74a6c
     </div>
 
   </div>
 
-<<<<<<< HEAD
-</div> <!-- 🔥 NOWE -->
-=======
 </div>
->>>>>>> 425f8fa3932ae8c6495665bcd5712751a1e74a6c
 
 {% endblock %}
