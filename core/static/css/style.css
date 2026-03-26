@@ -917,11 +917,16 @@ body {
 /* 🖼️ IMAGE */
 .product-detail-image img {
     width: 100%;
+<<<<<<< HEAD
     height: 400px;        /* 🔥 KLUCZ */
     object-fit: cover;    /* 🔥 KLUCZ */
     border-radius: 20px;
     box-shadow: 0 12px 30px rgba(0,0,0,0.15);
     object-position: right center;
+=======
+    border-radius: 20px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+>>>>>>> 425f8fa3932ae8c6495665bcd5712751a1e74a6c
 }
 
 /* 🧠 INFO */

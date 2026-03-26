@@ -1,17 +1,37 @@
-# Python
+# 🔥 Python
 __pycache__/
 *.py[cod]
+*.pyo
+*.pyd
 
-# Virtual environment
+# 🔥 Virtualenv
 venv/
+.env
 
+# 🔥 Django
+*.sqlite3
+db.sqlite3
 
+# 🔥 Media (uploady użytkowników)
+media/
 
-# Logs
+# 🔥 Static (opcjonalnie jeśli collectstatic)
+staticfiles/
+
+# 🔥 Logs
 *.log
 
-# VSCode
-.vscode/
+# 🔥 Environment variables
+.env
+.env.*
 
-# System
+# 🔥 VSCode / IDE
+.vscode/
+.idea/
+
+# 🔥 System
 Thumbs.db
+.DS_Store
+
+# 🔥 Git
+*.swp
