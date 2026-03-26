@@ -2,45 +2,49 @@
 
 {% block content %}
 
-<div class="product-detail-container">
+<div class="container">  <!-- 🔥 NOWE -->
 
-  <!-- 🖼️ LEFT -->
-  <div class="product-detail-image">
-    {% if product.image %}
-      <img src="{{ product.image.url }}" alt="{{ product.name }}">
-    {% endif %}
-  </div>
+  <div class="product-detail-container">
 
-  <!-- 🧠 RIGHT -->
-  <div class="product-detail-info">
-
-    <h1>{{ product.name }}</h1>
-
-    <div class="product-price">
-      {{ product.price }} zł
+    <!-- 🖼️ LEFT -->
+    <div class="product-detail-image">
+      {% if product.image %}
+        <img src="{{ product.image.url }}" alt="{{ product.name }}">
+      {% endif %}
     </div>
 
-    <p class="product-description">
-      {{ product.description }}
-    </p>
+    <!-- 🧠 RIGHT -->
+    <div class="product-detail-info">
 
-    <a href="mailto:niemieckizania87@gmail.com?subject=Zamówienie {{ product.name }}" class="btn">
-      Zamów przez email
-    </a>
+      <h1>{{ product.name }}</h1>
 
-    <div class="order-box">
-      <h3>Jak zamówić?</h3>
+      <div class="product-price">
+        {{ product.price }} zł
+      </div>
 
-      <ol>
-        <li>Wyślij email na: <b>niemieckizania87@gmail.com</b></li>
-        <li>W tytule wpisz nazwę pakietu</li>
-        <li>Opłać zamówienie (PayPal lub przelew)</li>
-        <li>Po zaksięgowaniu otrzymasz plik PDF</li>
-      </ol>
+      <p class="product-description">
+        {{ product.description }}
+      </p>
+
+      <a href="mailto:niemieckizania87@gmail.com?subject=Zamówienie {{ product.name }}" class="btn">
+        Zamów przez email
+      </a>
+
+      <div class="order-box">
+        <h3>Jak zamówić?</h3>
+
+        <ol>
+          <li>Wyślij email na: <b>niemieckizania87@gmail.com</b></li>
+          <li>W tytule wpisz nazwę pakietu</li>
+          <li>Opłać zamówienie (PayPal lub przelew)</li>
+          <li>Po zaksięgowaniu otrzymasz plik PDF</li>
+        </ol>
+      </div>
+
     </div>
 
   </div>
 
-</div>
+</div> <!-- 🔥 NOWE -->
 
 {% endblock %}

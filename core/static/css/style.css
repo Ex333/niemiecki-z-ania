@@ -14,9 +14,10 @@ body {
 
 /* 📦 CONTAINER */
 .container {
-  width: 90%;
-  max-width: 1200px;
-  margin: auto;
+    width: 100%;              
+    max-width: 1800px;
+    margin: 0 auto;
+    padding: 0 20px;          
 }
 
 /* 🔝 NAVBAR */
@@ -916,8 +917,11 @@ body {
 /* 🖼️ IMAGE */
 .product-detail-image img {
     width: 100%;
+    height: 400px;        /* 🔥 KLUCZ */
+    object-fit: cover;    /* 🔥 KLUCZ */
     border-radius: 20px;
     box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+    object-position: right center;
 }
 
 /* 🧠 INFO */
