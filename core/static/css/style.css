@@ -423,6 +423,16 @@ body {
   cursor: pointer;
 }
 
+@media (max-width: 768px) {
+  .contact-wrapper {
+    grid-template-columns: 1fr;  
+    gap: 30px;
+  }
+
+  .contact-text {
+    text-align: left;
+  }
+}
 /* DZIEKUJE */
 .thank-you-wrapper {
     display: flex;
