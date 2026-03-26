@@ -6,83 +6,81 @@
 
   <div class="product-detail-container">
 
+    <!-- 🖼️ LEFT -->
+    <div class="product-detail-image">
+      {% if product.image %}
+        <img src="{{ product.image.url }}" alt="{{ product.name }}">
+      {% endif %}
+    </div>
 
-<!-- 🖼️ LEFT -->
-<div class="product-detail-image">
-  {% if product.image %}
-    <img src="{{ product.image.url }}" alt="{{ product.name }}">
-  {% endif %}
-</div>
+    <!-- 🧠 RIGHT -->
+    <div class="product-detail-info">
 
-<!-- 🧠 RIGHT -->
-<div class="product-detail-info">
+      <h1>{{ product.name }}</h1>
 
-  <h1>{{ product.name }}</h1>
+      <div class="product-price">
+        {{ product.price|floatformat:2 }} PLN
+      </div>
 
-  <div class="product-price">
-    {{ product.price|floatformat:2 }} PLN
-  </div>
+      <p class="product-description">
+        {{ product.description }}
+      </p>
 
-  <p class="product-description">
-    {{ product.description }}
-  </p>
+      <!-- 🔥 BUTTONY -->
+      <div class="product-actions">
 
-  <!-- 🔥 BUTTONY -->
-  <div class="product-actions">
+        <!-- 📩 EMAIL -->
+        <a 
+          href="mailto:niemieckizania87@gmail.com?subject=Zamowienie%20{{ product.name|urlencode }}&body=Dzien%20dobry,%0A%0AChce%20zamowic:%20{{ product.name|urlencode }}%0AImie:%20%0AEmail:%20"
+          class="btn secondary"
+        >
+          Zamów przez email
+        </a>
 
-    <!-- 📩 EMAIL -->
-    <a 
-      href="mailto:niemieckizania87@gmail.com?subject=Zamówienie%20{{ product.name|urlencode }}"
-      class="btn secondary"
-    >
-      Zamów przez email
-    </a>
+        <!-- 💳 PAYPAL -->
+        <a 
+          href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=mateusz.haldas90@gmail.com&amount={{ product.price|stringformat:'.2f' }}&currency_code=PLN&item_name={{ product.name|urlencode }}"
+          target="_blank"
+          class="btn"
+        >
+          Zapłać PayPal
+        </a>
 
-    <!-- 💳 PAYPAL -->
-    <a 
-      href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=mateusz.haldas90@gmail.com&amount={{ product.price|stringformat:'.2f' }}&currency_code=PLN&item_name={{ product.name|urlencode }}"
-      target="_blank"
-      class="btn"
-    >
-    Zapłać PayPal
-  </a>
+      </div>
 
-  </div>
+      <!-- 🔥 INFO -->
+      <p style="font-size:14px; color:#666; margin-top:10px;">
+        👉 W tytule płatności wpisz: <strong>Twoje imię + {{ product.name }}</strong>
+      </p>
 
-  <!-- 🔥 INFO -->
-  <p style="font-size:14px; color:#666; margin-top:10px;">
-    👉 W tytule płatności wpisz: <strong>Twoje imię + {{ product.name }}</strong>
-  </p>
+      <!-- 🔥 INSTRUKCJA -->
+      <div class="order-box">
+        <h3>Jak zamówić?</h3>
 
-  <!-- 🔥 INSTRUKCJA -->
-  <div class="order-box">
-    <h3>Jak zamówić?</h3>
+        <ol>
+          <li>
+            Kliknij <b>PayPal</b> lub napisz email
+          </li>
 
-    <ol>
-      <li>
-        Kliknij <b>PayPal</b> lub napisz email
-      </li>
+          <li>
+            Jeśli płacisz przelewem:
+            <br><br>
+            🏦 <b>Numer konta:</b><br>
+            PL30 1940 1076 4932 6007 0000 0000
+          </li>
 
-      <li>
-        Jeśli płacisz przelewem:
-        <br><br>
-        🏦 <b>Numer konta:</b><br>
-        PL30 1940 1076 4932 6007 0000 0000
-      </li>
+          <li>
+            W tytule wpisz:
+            <b>Twoje imię + {{ product.name }}</b>
+          </li>
 
-      <li>
-        W tytule wpisz:
-        <b>Twoje imię + {{ product.name }}</b>
-      </li>
+          <li>
+            Po zaksięgowaniu otrzymasz plik PDF na email 📩
+          </li>
+        </ol>
+      </div>
 
-      <li>
-        Po zaksięgowaniu otrzymasz plik PDF na email 📩
-      </li>
-    </ol>
-  </div>
-
-</div>
-
+    </div>
 
   </div>
 
