@@ -4,7 +4,7 @@ from django.core.paginator import Paginator
 
 
 def sklep(request):
-    products = Product.objects.filter(available=True)
+    products = Product.objects.filter(available=True).order_by("name")
 
     paginator = Paginator(products, 9)  
     page_number = request.GET.get("page")  

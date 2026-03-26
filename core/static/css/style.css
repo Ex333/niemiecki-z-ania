@@ -351,8 +351,18 @@ body {
 
 .main-content {
   flex: 1;
-  display: flex;            
-  flex-direction: column;   
+  display: flex;
+  flex-direction: column;
+}
+
+/* 🔥 odstęp tylko między sekcjami */
+.main-content > *:not(.hero) {
+  margin-top: 60px;
+}
+
+/* 🔥 pierwszy element NIE ma odstępu */
+.main-content > *:first-child:not(.hero) {
+    margin-top: 30px;
 }
 
 /* 🔥 CONTACT SECTION */
@@ -924,22 +934,29 @@ body {
    ========================= */
 
 .product-detail-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 50px;
-    align-items: start;
-    margin-top: 40px;
-    margin-bottom: 60px;
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+    flex-direction: row; /* 🔥 KLUCZ */
+}
+
+/* lewa strona */
+.product-detail-image {
+    flex: 1;
+}
+
+/* prawa strona */
+.product-detail-info {
+    flex: 1;
 }
 
 /* 🖼️ IMAGE */
 .product-detail-image img {
     width: 100%;
-    height: 400px;        /* 🔥 KLUCZ */
-    object-fit: cover;    /* 🔥 KLUCZ */
+    height: 400px;
+    object-fit: contain;   /* 🔥 ZAMIANA */
+    background: #f5f5f5;   /* 🔥 żeby nie było pustych dziur */
     border-radius: 20px;
-    box-shadow: 0 12px 30px rgba(0,0,0,0.15);
-    object-position: right center;
 }
 
 /* 🧠 INFO */
@@ -984,6 +1001,10 @@ body {
     box-shadow: 0 10px 25px rgba(0,0,0,0.08);
     transition: 0.3s;
     text-align: center;
+
+    display: flex;              
+    flex-direction: column;     
+    height: 100%;               
 }
 
 .product-card:hover {
@@ -991,10 +1012,14 @@ body {
     box-shadow: 0 18px 35px rgba(0,0,0,0.12);
 }
 
+.product-card .product-price {
+    margin-top: auto;   
+}
 .product-card img {
     width: 100%;
-    height: 180px;
-    object-fit: cover;
+    height: auto;              
+    max-height: 200px;         
+    object-fit: contain;       
     border-radius: 12px;
     margin-bottom: 15px;
 }
@@ -1007,6 +1032,7 @@ body {
     font-weight: bold;
     color: #2e7d32;
     margin-bottom: 15px;
+    margin: 10px 0 15px;
 }
 
 /* 🛍️ SHOP TITLE */
@@ -1062,3 +1088,4 @@ body {
 .order-box li {
     margin-bottom: 8px;
 }
+
