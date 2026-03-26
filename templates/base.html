@@ -88,8 +88,10 @@
         <!-- ⚖️ RIGHT -->
         <div class="footer-legal">
             <h4>Informacje</h4>
-            <a href="/impressum/">Impressum</a>
-            <a href="/privacy/">Polityka prywatności</a>
+
+            <a href="{% url 'regulamin' %}">Regulamin</a>
+            <a href="{% url 'privacy' %}">Polityka prywatności</a>
+            <a href="{% url 'seller' %}">Dane sprzedawcy</a>
         </div>
 
     </div>

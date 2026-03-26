@@ -9,9 +9,7 @@
     <!-- 🔥 TOP BAR -->
     <div class="materials-top">
 
-        <!-- 🔥 KATEGORIE -->
         <div class="categories">
-
             <a href="{% url 'material_list' %}"
                class="btn-wszystkie {% if not active_category %}active{% endif %}">
                 Wszystkie
@@ -23,10 +21,8 @@
                     {{ cat.name }}
                 </a>
             {% endfor %}
-
         </div>
 
-        <!-- 🔥 SEARCH -->
         <form method="GET" class="search-form">
             <input 
                 type="text" 
@@ -35,9 +31,7 @@
                 value="{{ request.GET.search }}"
                 class="search-input"
             >
-            <button type="submit" class="search-btn">
-                🔍
-            </button>
+            <button type="submit" class="search-btn">🔍</button>
         </form>
 
     </div>
@@ -47,19 +41,13 @@
 
         {% for material in page_obj %}
             <div class="material-card">
-
                 <h3>{{ material.title }}</h3>
-
                 <p>{{ material.description|truncatewords:12 }}</p>
-
-                <p class="material-category">
-                    {{ material.category.name }}
-                </p>
+                <p class="material-category">{{ material.category.name }}</p>
 
                 <a href="{% url 'material_detail' material.slug %}" class="btn-red">
                     👉 Zobacz materiał
                 </a>
-
             </div>
         {% empty %}
             <p>Brak materiałów</p>
@@ -67,26 +55,26 @@
 
     </div>
 
-    <!-- 🔥 PAGINACJA -->
-    <div class="pagination">
+</div>
 
-        {% if page_obj.has_previous %}
-            <a href="?page={{ page_obj.previous_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}" class="page-btn">
-                ←
-            </a>
-        {% endif %}
+<!-- 🔥 PAGINACJA (PRZENIESIONA!) -->
+<div class="pagination">
 
-        <span class="page-info">
-            {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
-        </span>
+    {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}" class="page-btn">
+            ←
+        </a>
+    {% endif %}
 
-        {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}" class="page-btn">
-                →
-            </a>
-        {% endif %}
+    <span class="page-info">
+        {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
+    </span>
 
-    </div>
+    {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}" class="page-btn">
+            →
+        </a>
+    {% endif %}
 
 </div>
 

@@ -72,3 +72,15 @@ def material_by_category(request, slug):
         "categories": categories,
         "active_category": category
     })
+
+
+def privacy(request):
+    return render(request, "legal/privacy.html")
+
+
+def regulamin(request):
+    return render(request, "legal/regulamin.html")
+
+
+def seller(request):
+    return render(request, "legal/seller.html")

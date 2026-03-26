@@ -10,5 +10,10 @@ urlpatterns = [
     path("materialy/", views.material_list, name="material_list"),
     path("materialy/kategoria/<slug:slug>/", views.material_by_category, name="material_by_category"),
     path("materialy/<slug:slug>/", views.material_detail, name="material_detail"),
+
+    # LEGAL
+    path("regulamin/", views.regulamin, name="regulamin"),
+    path("polityka-prywatnosci/", views.privacy, name="privacy"),
+    path("dane-sprzedawcy/", views.seller, name="seller"),
 ]
 
