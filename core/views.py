@@ -4,6 +4,8 @@ from .models import HomePage, Category, Material
 from .forms import ContactForm
 from django.db.models import Q
 from django.core.paginator import Paginator
+from django.core.mail import send_mail
+from django.conf import settings
 
 
 def home(request):
@@ -19,14 +21,38 @@ def kontakt(request):
         email = form.cleaned_data["email"]
         message = form.cleaned_data["message"]
 
-        print(name, email, message)
+        # 📩 MAIL DO CIEBIE
+        send_mail(
+            subject=f"Nowa wiadomość od {name}",
+            message=f"Imię: {name}\nEmail: {email}\n\nWiadomość:\n{message}",
+            from_email=settings.EMAIL_HOST_USER,
+            recipient_list=[settings.EMAIL_HOST_USER],
+            fail_silently=False,
+        )
+
+        # 📩 AUTO-ODPOWIEDŹ DO UŻYTKOWNIKA (PO POLSKU)
+        send_mail(
+            subject="Dziękujemy za wiadomość",
+            message=f"""Cześć {name},
+
+dziękujemy za wiadomość.
+Odpowiemy Ci wkrótce.
+
+Pozdrawiamy  
+Ania""",
+            from_email=settings.EMAIL_HOST_USER,
+            recipient_list=[email],
+            fail_silently=False,
+        )
 
         return redirect("dziekuje")
 
     return render(request, "kontakt.html", {"form": form})
 
+
 def dziekuje(request):
     return render(request, "dziekuje.html")
+
 
 def material_list(request):
     materials = Material.objects.all().order_by("-created_at")
