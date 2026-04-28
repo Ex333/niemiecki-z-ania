@@ -3,16 +3,44 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
+    
 
-    <title>{% block title %}Niemiecki z Anią{% endblock %}</title>
+<!-- 📱 RESPONSIVE -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- 🔍 SEO -->
+<title>{% block title %}Niemiecki z Anią – Nauka niemieckiego online{% endblock %}</title>
+<meta name="description" content="{% block description %}Ucz się niemieckiego szybko i skutecznie. Materiały PDF, lekcje online i praktyczna nauka języka niemieckiego.{% endblock %}">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://niemieckizania.pl{% block canonical %}{% endblock %}">
 
-    <!-- FONT -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<!-- 🌍 OPEN GRAPH -->
+<meta property="og:title" content="Niemiecki z Anią">
+<meta property="og:description" content="Nauka niemieckiego w praktyczny sposób">
+<meta property="og:image" content="https://niemieckizania.pl/static/images/logo.png">
+<meta property="og:url" content="https://niemieckizania.pl">
+<meta property="og:type" content="website">
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+<!-- 🐦 TWITTER -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Niemiecki z Anią">
+<meta name="twitter:description" content="Nauka niemieckiego online">
+<meta name="twitter:image" content="https://niemieckizania.pl/static/images/logo.png">
+
+<!-- 🎨 FAVICON (NAPRAWIONE) -->
+<link rel="icon" type="image/png" href="{% static 'images/favicon.png' %}">
+<link rel="shortcut icon" href="{% static 'images/favicon.png' %}">
+<link rel="apple-touch-icon" href="{% static 'images/favicon.png' %}">
+
+<!-- ⚡ PERFORMANCE -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<!-- FONT -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<!-- CSS -->
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 
 <body>
