@@ -71,15 +71,15 @@
             <h2>{{ homepage.target_title|default:"Dla kogo jest ta strona?" }}</h2>
 
             <ul>
-                <li>✔️ Dla początkujących (A1–A2)</li>
-                <li>✔️ Dla osób mieszkających w Niemczech 🇩🇪</li>
+                <li>✔️ Dla początkujących (A1–B2)</li>
+                <li>✔️ Dla osób mieszkających w Niemczech </li>
                 <li>✔️ Dla tych, którzy chcą mówić bez stresu</li>
             </ul>
         </div>
 
         <!-- 🖼️ ZDJĘCIE -->
         <div class="target-image">
-            <img src="{% static 'images/ania1.jpeg' %}" alt="Nauka niemieckiego">
+            <img src="{% static 'images/brama.webp' %}" alt="Nauka niemieckiego">
         </div>
 
     </div>
@@ -87,27 +87,17 @@
 
 <!-- ⭐ O ANI -->
 <section class="about">
-    <div class="container about-wrapper">
+    <div class="about-wrapper">
 
-        <!-- 🖼️ ZDJĘCIE -->
-        <div class="about-image">
-            <img src="{% static 'images/ania.jpg' %}" alt="Ania - nauczycielka niemieckiego">
-        </div>
-
-        <!-- 📝 TEKST -->
-        <div class="about-text">
-            <h2>{{ homepage.about_title|default:"O mnie" }}</h2>
-
-            <p>
-                {{ homepage.about_text|default:"Pomagam Polakom nauczyć się niemieckiego w prosty i praktyczny sposób. Skupiam się na tym, co naprawdę przydaje się w życiu i pracy." }}
-            </p>
-
-            <a href="/kontakt/" class="btn secondary">
-                Umów lekcję
-            </a>
-        </div>
-
+    <div class="about-image">
+        <img src="{% static 'images/ania.jpg' %}" alt="O mnie">
     </div>
+
+    <div class="about-text">
+        {{ homepage.about_text|safe }}
+    </div>
+
+</div>
 </section>
 
 <!-- 🔥 CTA WRAPPER (JEDNA SEKCA) -->
