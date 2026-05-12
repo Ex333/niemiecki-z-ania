@@ -6,14 +6,25 @@
 
   <div class="product-detail-container">
 
-    <!-- 🖼️ LEFT -->
+    <!-- ========================= -->
+    <!-- PRODUCT IMAGE -->
+    <!-- ========================= -->
+
     <div class="product-detail-image">
+
       {% if product.image %}
-        <img src="{{ product.image.url }}" alt="{{ product.name }}">
+        <img 
+          src="{{ product.image.url }}" 
+          alt="{{ product.name }}"
+        >
       {% endif %}
+
     </div>
 
-    <!-- 🧠 RIGHT -->
+    <!-- ========================= -->
+    <!-- PRODUCT INFO -->
+    <!-- ========================= -->
+
     <div class="product-detail-info">
 
       <h1>{{ product.name }}</h1>
@@ -26,58 +37,92 @@
         {{ product.description }}
       </p>
 
-      <!-- 🔥 BUTTONY -->
+      <!-- ========================= -->
+      <!-- PAYPAL SECTION -->
+      <!-- ========================= -->
+
       <div class="product-actions">
 
-        <!-- 📩 EMAIL -->
-        <a 
-          href="mailto:niemieckizania87@gmail.com?subject=Zamowienie%20{{ product.name|urlencode }}&body=Dzien%20dobry,%0A%0AChce%20zamowic:%20{{ product.name|urlencode }}%0AImie:%20%0AEmail:%20"
-          class="btn secondary"
+        <!-- PAYPAL FORM -->
+        <form 
+          method="POST"
+          action="{% url 'create-checkout' product.slug %}"
+          class="paypal-form"
         >
-          Zamów przez email
-        </a>
 
-        <!-- 💳 PAYPAL -->
+          {% csrf_token %}
+
+          <div class="paypal-form-top">
+
+            <input
+              type="email"
+              name="email"
+              placeholder="Wpisz swój adres email"
+              required
+              class="email-input"
+            >
+
+            <button 
+              type="submit" 
+              class="btn paypal-btn"
+            >
+              Zapłać PayPal
+            </button>
+
+          </div>
+
+        </form>
+
+        <!-- EMAIL ORDER -->
         <a 
-          href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=annawac1987@gmail.com&amount={{ product.price|stringformat:'.2f' }}&currency_code=PLN&item_name={{ product.name|urlencode }}"
-          target="_blank"
-          class="btn"
+          href="mailto:niemieckizania87@gmail.com?subject=Zamowienie%20{{ product.name|urlencode }}"
+          class="email-order-link"
         >
-          Zapłać PayPal
+          Lub zamów tradycyjnie przez email
         </a>
 
       </div>
 
-      <!-- 🔥 INFO -->
-      <p style="font-size:14px; color:#666; margin-top:10px;">
-        👉 W tytule płatności wpisz: <strong>Twoje imię + {{ product.name }}</strong>
+      <!-- ========================= -->
+      <!-- PAYMENT INFO -->
+      <!-- ========================= -->
+
+      <p class="payment-info">
+        🔒 Bezpieczna płatność PayPal
       </p>
 
-      <!-- 🔥 INSTRUKCJA -->
+      <!-- ========================= -->
+      <!-- ORDER BOX -->
+      <!-- ========================= -->
+
       <div class="order-box">
+
         <h3>Jak zamówić?</h3>
 
         <ol>
+
           <li>
-            Kliknij <b>PayPal</b> lub napisz email
+            Wpisz swój adres email
           </li>
 
           <li>
-            Jeśli płacisz przelewem:
-            <br><br>
-            🏦 <b>Numer konta:</b><br>
-            PL30 1940 1076 4932 6007 0000 0000
+            Kliknij <b>Zapłać PayPal</b>
           </li>
 
           <li>
-            W tytule wpisz:
-            <b>Twoje imię + {{ product.name }}</b>
+            Zostaniesz przekierowany do bezpiecznej płatności PayPal
           </li>
 
           <li>
-            Po zaksięgowaniu otrzymasz plik PDF na email 📩
+            Po opłaceniu zamówienia system automatycznie potwierdzi płatność
           </li>
+
+          <li>
+            Otrzymasz email z bezpiecznym linkiem do pobrania materiału 📩
+          </li>
+
         </ol>
+
       </div>
 
     </div>
