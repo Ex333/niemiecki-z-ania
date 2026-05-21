@@ -4,130 +4,164 @@
 
 <div class="container">
 
-  <div class="product-detail-container">
+    <div class="product-detail-container">
 
-    <!-- ========================= -->
-    <!-- PRODUCT IMAGE -->
-    <!-- ========================= -->
+        <!-- LEWA STRONA -->
 
-    <div class="product-detail-image">
+        <div class="product-detail-image">
 
-      {% if product.image %}
-        <img 
-          src="{{ product.image.url }}" 
-          alt="{{ product.name }}"
-        >
-      {% endif %}
+            {% if product.image %}
+                <img
+                    src="{{ product.image.url }}"
+                    alt="{{ product.name }}"
+                >
+            {% endif %}
 
-    </div>
+        </div>
 
-    <!-- ========================= -->
-    <!-- PRODUCT INFO -->
-    <!-- ========================= -->
 
-    <div class="product-detail-info">
+        <!-- PRAWA STRONA -->
 
-      <h1>{{ product.name }}</h1>
+        <div class="product-detail-info">
 
-      <div class="product-price">
-        {{ product.price|floatformat:2 }} PLN
-      </div>
+            <h1>
+                {{ product.name }}
+            </h1>
 
-      <p class="product-description">
-        {{ product.description }}
-      </p>
+            <div class="product-price">
+                {{ product.price|floatformat:2 }} PLN
+            </div>
 
-      <!-- ========================= -->
-      <!-- PAYPAL SECTION -->
-      <!-- ========================= -->
+            <p class="product-description">
+                {{ product.description }}
+            </p>
 
-      <div class="product-actions">
 
-        <!-- PAYPAL FORM -->
-        <form 
-          method="POST"
-          action="{% url 'create-checkout' product.slug %}"
-          class="paypal-form"
-        >
+            <!-- ERROR -->
 
-          {% csrf_token %}
+            {% if error %}
 
-          <div class="paypal-form-top">
-
-            <input
-              type="email"
-              name="email"
-              placeholder="Wpisz swój adres email"
-              required
-              class="email-input"
+            <div
+            style="
+            background:#ffeaea;
+            color:#c62828;
+            padding:12px;
+            border-radius:10px;
+            margin-bottom:20px;
+            "
             >
 
-            <button 
-              type="submit" 
-              class="btn paypal-btn"
-            >
-              Zapłać PayPal
-            </button>
+                {{ error }}
 
-          </div>
+            </div>
 
-        </form>
+            {% endif %}
 
-        <!-- EMAIL ORDER -->
-        <a 
-          href="mailto:niemieckizania87@gmail.com?subject=Zamowienie%20{{ product.name|urlencode }}"
-          class="email-order-link"
-        >
-          Lub zamów tradycyjnie przez email
-        </a>
 
-      </div>
+            <!-- ORDER -->
 
-      <!-- ========================= -->
-      <!-- PAYMENT INFO -->
-      <!-- ========================= -->
+            <div class="product-actions">
 
-      <p class="payment-info">
-        🔒 Bezpieczna płatność PayPal
-      </p>
+                <form
+                    method="POST"
+                    action="{% url 'create_order' product.slug %}"
+                    class="paypal-form"
+                >
 
-      <!-- ========================= -->
-      <!-- ORDER BOX -->
-      <!-- ========================= -->
+                    {% csrf_token %}
 
-      <div class="order-box">
+                    <input
+                        type="text"
+                        name="customer_name"
+                        placeholder="👤 Twoje imię"
+                        required
+                        class="email-input"
+                    >
 
-        <h3>Jak zamówić?</h3>
+                    <input
+                        type="email"
+                        name="email"
+                        placeholder="📩 Twój email"
+                        required
+                        class="email-input"
+                    >
 
-        <ol>
+                    <button
+                      type="submit"
+                      class="paypal-btn"
+                    >
 
-          <li>
-            Wpisz swój adres email
-          </li>
+                      <span class="paypal-logo">
+                        PayPal
+                      </span>
 
-          <li>
-            Kliknij <b>Zapłać PayPal</b>
-          </li>
+                      Zapłać {{ product.price|floatformat:2 }} PLN
 
-          <li>
-            Zostaniesz przekierowany do bezpiecznej płatności PayPal
-          </li>
+                    </button>
 
-          <li>
-            Po opłaceniu zamówienia system automatycznie potwierdzi płatność
-          </li>
+                </form>
 
-          <li>
-            Otrzymasz email z bezpiecznym linkiem do pobrania materiału 📩
-          </li>
 
-        </ol>
+                <a
+                    href="mailto:niemieckizania87@gmail.com?subject=Zamowienie%20{{ product.name|urlencode }}"
+                    class="email-order-link"
+                >
 
-      </div>
+                    Lub zamów tradycyjnie przez email
+
+                </a>
+
+            </div>
+
+
+            <!-- PAYMENT -->
+
+            <p class="payment-info">
+
+                🔒 Bezpieczna płatność przez PayPal
+
+            </p>
+
+
+            <!-- HOW -->
+
+            <div class="order-box">
+
+                <h3>
+
+                    Jak zamówić?
+
+                </h3>
+
+                <ol>
+
+                    <li>
+                        Wpisz swoje dane
+                    </li>
+
+                    <li>
+                        Kliknij „Kup teraz”
+                    </li>
+
+                    <li>
+                        Nastąpi przekierowanie do PayPal
+                    </li>
+
+                    <li>
+                        Opłać zamówienie
+                    </li>
+
+                    <li>
+                        Ania ręcznie wyśle materiały na email 📩
+                    </li>
+
+                </ol>
+
+            </div>
+
+        </div>
 
     </div>
-
-  </div>
 
 </div>
 

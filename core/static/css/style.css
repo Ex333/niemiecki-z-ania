@@ -1141,97 +1141,190 @@ body {
 }
 
 /* =========================
-   💳 PAYPAL FORM FIX
+   💳 PRODUCT BUY BOX
    ========================= */
 
-.product-actions {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 14px;
-    margin-top: 25px;
+.product-actions{
+    margin-top:30px;
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+    width:100%;
 }
 
 /* FORM */
-.paypal-form {
-    width: 100%;
+
+.paypal-form{
+    display:flex;
+    flex-direction:column;
+    gap:18px;
 }
 
-/* INPUT + BUTTON */
-.paypal-form-top {
-    display: flex;
-    gap: 12px;
-    align-items: center;
-    flex-wrap: wrap;
+/* INPUT */
+
+.email-input{
+
+    width:100%;
+
+    padding:16px 18px;
+
+    border:1px solid #ddd;
+    border-radius:14px;
+
+    background:white;
+
+    font-size:15px;
+
+    transition:.25s;
 }
 
-/* EMAIL INPUT */
-.email-input {
-    flex: 1;
-    min-width: 260px;
+.email-input:focus{
 
-    padding: 14px 16px;
+    outline:none;
 
-    border: 1px solid #d9d9d9;
-    border-radius: 14px;
-
-    background: white;
-
-    font-size: 15px;
-    font-family: inherit;
-
-    transition: all 0.2s ease;
-}
-
-/* FOCUS */
-.email-input:focus {
-    outline: none;
-    border-color: #2e7d32;
+    border-color:#2e7d32;
 
     box-shadow:
-        0 0 0 4px rgba(46,125,50,0.12);
+    0 0 0 4px rgba(46,125,50,.12);
+
 }
 
-/* PAYPAL BUTTON */
-.paypal-btn {
-    border: none;
-    cursor: pointer;
-    white-space: nowrap;
+
+/* BUTTON */
+
+.paypal-btn{
+
+    width:100%;
+
+    border:none;
+
+    cursor:pointer;
+
+    padding:16px;
+
+    font-size:17px;
+    font-weight:700;
+
+    border-radius:14px;
+
+    background:linear-gradient(
+    135deg,
+    #ffc439,
+    #ffdd57
+    );
+
+    color:#003087;
+
+    transition:.3s;
+
 }
+
+.paypal-btn:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:
+    0 12px 30px rgba(0,0,0,.12);
+
+}
+
 
 /* EMAIL LINK */
-.email-order-link {
-    color: #666;
-    text-decoration: none;
-    font-size: 14px;
-    transition: 0.2s;
+
+.email-order-link{
+
+    display:block;
+
+    text-align:center;
+
+    margin-top:10px;
+
+    color:#666;
+
+    text-decoration:none;
+
+    font-size:14px;
+
 }
 
-.email-order-link:hover {
-    color: #2e7d32;
+.email-order-link:hover{
+
+    color:#2e7d32;
+
 }
 
-/* PAYMENT INFO */
-.payment-info {
-    margin-top: 14px;
-    font-size: 14px;
-    color: #555;
+
+/* INFO */
+
+.payment-info{
+
+    margin-top:25px;
+    margin-bottom:25px;
+
+    color:#666;
+
+    font-size:14px;
 }
+
+
+/* HOW TO ORDER */
+
+.order-box{
+
+    margin-top:40px;
+
+    background:white;
+
+    padding:30px;
+
+    border-radius:20px;
+
+    box-shadow:
+    0 10px 30px rgba(0,0,0,.06);
+
+}
+
+.order-box li{
+
+    margin-bottom:14px;
+
+}
+
+
+/* odstęp od stopki */
+
+.product-detail-container{
+
+margin-bottom:100px;
+
+}
+
 
 /* MOBILE */
-@media (max-width: 768px) {
 
-    .paypal-form-top {
-        flex-direction: column;
-        align-items: stretch;
-    }
+@media(max-width:768px){
 
-    .paypal-btn {
-        width: 100%;
-    }
+.product-detail-container{
 
-    .email-input {
-        width: 100%;
-        min-width: unset;
-    }
+flex-direction:column;
+
+}
+
+}
+/* PAYPAL LOGO */
+
+.paypal-logo{
+
+    font-weight:800;
+
+    color:#003087;
+
+    margin-right:8px;
+
+}
+
+.paypal-logo::after{
+
+    content:" →";
+
 }
