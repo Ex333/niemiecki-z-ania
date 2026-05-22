@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+
+    <div class="payment-box cancel-box">
+
+        <h1>
+            ❌ Płatność anulowana
+        </h1>
+
+        <p>
+
+            Płatność nie została zakończona.
+
+        </p>
+
+        <p>
+
+            Możesz wrócić i spróbować ponownie.
+
+        </p>
+
+        <a
+            href="{% url 'sklep' %}"
+            class="back-btn"
+        >
+
+            Powrót do sklepu
+
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}

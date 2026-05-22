@@ -110,13 +110,25 @@ def create_order(request, slug):
         email=email
     )
 
-    # PAYPAL REDIRECT
+    # URL po sukcesie i anulowaniu
+    success_url = request.build_absolute_uri(
+        "/shop/payment-success/"
+    )
 
+    cancel_url = request.build_absolute_uri(
+        "/shop/payment-cancel/"
+    )
+
+    # PAYPAL REDIRECT
     paypal_params = urlencode({
         "business": "annawac1987@gmail.com",
         "item_name": product.name,
         "amount": f"{product.price:.2f}",
         "currency_code": "PLN",
+
+        "return": success_url,
+        "cancel_return": cancel_url,
+        "rm": "2",
     })
 
     paypal_url = (
@@ -126,4 +138,24 @@ def create_order(request, slug):
 
     return redirect(
         paypal_url
+    )
+
+
+# =========================
+# PAYMENT PAGES
+# =========================
+
+def payment_success(request):
+
+    return render(
+        request,
+        "shop/payment_success.html"
+    )
+
+
+def payment_cancel(request):
+
+    return render(
+        request,
+        "shop/payment_cancel.html"
     )

@@ -1328,3 +1328,49 @@ flex-direction:column;
     content:" →";
 
 }
+
+/* PAYMENT SUCCESS / CANCEL */
+
+.payment-box{
+    max-width:700px;
+    margin:80px auto;
+    background:#fff;
+    padding:50px;
+    border-radius:20px;
+    text-align:center;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+.payment-box h1{
+    margin-bottom:20px;
+    font-size:36px;
+}
+
+.payment-box p{
+    margin-bottom:15px;
+    line-height:1.7;
+}
+
+.success-box{
+    border-top:6px solid #2e7d32;
+}
+
+.cancel-box{
+    border-top:6px solid #c62828;
+}
+
+.back-btn{
+    display:inline-block;
+    margin-top:25px;
+    padding:14px 25px;
+    border-radius:12px;
+    text-decoration:none;
+    color:white;
+    background:#1f7a1f;
+    font-weight:600;
+    transition:.3s;
+}
+
+.back-btn:hover{
+    transform:translateY(-2px);
+}
