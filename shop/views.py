@@ -111,30 +111,31 @@ def create_order(request, slug):
     )
 
     # URL po sukcesie i anulowaniu
-    success_url = request.build_absolute_uri(
-        "/shop/payment-success/"
-    )
+    success_url = "https://niemieckizania.pl/sklep/payment-success/"
 
-    cancel_url = request.build_absolute_uri(
-        "/shop/payment-cancel/"
-    )
+    cancel_url = "https://niemieckizania.pl/sklep/payment-cancel/"
 
     # PAYPAL REDIRECT
     paypal_params = urlencode({
-        "business": "annawac1987@gmail.com",
-        "item_name": product.name,
-        "amount": f"{product.price:.2f}",
-        "currency_code": "PLN",
+    "business": "annawac1987@gmail.com",
+    "item_name": product.name,
+    "amount": f"{product.price:.2f}",
+    "currency_code": "PLN",
 
-        "return": success_url,
-        "cancel_return": cancel_url,
-        "rm": "2",
-    })
+    "return": success_url,
+    "cancel_return": cancel_url,
+
+    "rm": "0",
+    "cbt": "Powrót do Niemiecki z Anią",
+    "no_shipping": "1",
+    "no_note": "1",
+})
 
     paypal_url = (
         "https://www.paypal.com/cgi-bin/webscr"
         f"?cmd=_xclick&{paypal_params}"
     )
+    print(paypal_url)
 
     return redirect(
         paypal_url

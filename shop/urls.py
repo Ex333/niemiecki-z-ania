@@ -10,32 +10,6 @@ from .views import (
 
 urlpatterns = [
 
-    # =========================
-    # SHOP
-    # =========================
-
-    path(
-        "",
-        sklep,
-        name="sklep"
-    ),
-
-    path(
-        "<slug:slug>/",
-        product_detail,
-        name="product_detail"
-    ),
-
-    path(
-        "order/<slug:slug>/",
-        create_order,
-        name="create_order"
-    ),
-
-    # =========================
-    # PAYPAL
-    # =========================
-
     path(
         "payment-success/",
         payment_success,
@@ -46,5 +20,23 @@ urlpatterns = [
         "payment-cancel/",
         payment_cancel,
         name="payment_cancel"
+    ),
+
+    path(
+        "",
+        sklep,
+        name="sklep"
+    ),
+
+    path(
+        "order/<slug:slug>/",
+        create_order,
+        name="create_order"
+    ),
+
+    path(
+        "<slug:slug>/",
+        product_detail,
+        name="product_detail"
     ),
 ]

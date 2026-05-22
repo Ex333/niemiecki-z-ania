@@ -16,12 +16,26 @@ DEBUG = env.bool("DEBUG", default=True)
 
 ALLOWED_HOSTS = env.list(
     "ALLOWED_HOSTS",
-    default=["127.0.0.1", "localhost"]
+    default=[
+        "127.0.0.1",
+        "localhost",
+        "niemieckizania.pl",
+        "www.niemieckizania.pl"
+    ]
 )
 
 CSRF_TRUSTED_ORIGINS = [
     "https://niemieckizania.pl",
+    "https://www.niemieckizania.pl",
 ]
+
+SECURE_PROXY_SSL_HEADER = (
+    'HTTP_X_FORWARD_PROTO',
+    'https'
+)
+
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
 
 # 📦 APPS
 INSTALLED_APPS = [
