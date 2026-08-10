@@ -1,16 +1,14 @@
-from django.shortcuts import (
-    render,
-    get_object_or_404,
-    redirect
-)
+import json
 
+import requests
+
+from django.conf import settings
 from django.core.paginator import Paginator
-from urllib.parse import urlencode
+from django.http import JsonResponse
+from django.shortcuts import render, get_object_or_404
+from django.views.decorators.http import require_POST
 
-from .models import (
-    Product,
-    Order
-)
+from .models import Product, Order
 
 
 # =========================
@@ -61,23 +59,45 @@ def product_detail(request, slug):
         request,
         "shop/product_detail.html",
         {
-            "product": product
+            "product": product,
+            "paypal_client_id": settings.PAYPAL_CLIENT_ID,
         }
     )
 
 
 # =========================
-# CREATE ORDER
+# PAYPAL ACCESS TOKEN
 # =========================
 
+def get_paypal_access_token():
+
+    response = requests.post(
+        f"{settings.PAYPAL_BASE_URL}/v1/oauth2/token",
+        auth=(
+            settings.PAYPAL_CLIENT_ID,
+            settings.PAYPAL_SECRET
+        ),
+        headers={
+            "Accept": "application/json",
+            "Accept-Language": "en_US",
+        },
+        data={
+            "grant_type": "client_credentials"
+        },
+        timeout=15,
+    )
+
+    response.raise_for_status()
+
+    return response.json()["access_token"]
+
+
+# =========================
+# CREATE PAYPAL ORDER
+# =========================
+
+@require_POST
 def create_order(request, slug):
-
-    if request.method != "POST":
-
-        return redirect(
-            "product_detail",
-            slug=slug
-        )
 
     product = get_object_or_404(
         Product,
@@ -85,60 +105,343 @@ def create_order(request, slug):
         available=True
     )
 
-    customer_name = request.POST.get(
-        "customer_name"
-    )
+    try:
+        data = json.loads(request.body)
+    except json.JSONDecodeError:
+        return JsonResponse(
+            {
+                "error": "Nieprawidłowe dane."
+            },
+            status=400
+        )
 
-    email = request.POST.get(
-        "email"
-    )
+    customer_name = str(
+        data.get("customer_name", "")
+    ).strip()
+
+    email = str(
+        data.get("email", "")
+    ).strip()
 
     if not customer_name or not email:
 
-        return render(
-            request,
-            "shop/product_detail.html",
+        return JsonResponse(
             {
-                "product": product,
-                "error": "Uzupełnij wszystkie pola."
+                "error": "Podaj imię oraz adres email."
+            },
+            status=400
+        )
+
+    # =========================
+    # GET PAYPAL TOKEN
+    # =========================
+
+    try:
+        access_token = get_paypal_access_token()
+
+    except requests.RequestException as e:
+
+        print(
+            "PayPal token error:",
+            e
+        )
+
+        return JsonResponse(
+            {
+                "error": "Nie udało się połączyć z PayPal."
+            },
+            status=502
+        )
+
+    # =========================
+    # CREATE LOCAL ORDER
+    # =========================
+
+    order = Order.objects.create(
+        product=product,
+        customer_name=customer_name,
+        email=email,
+        paid=False,
+    )
+
+    # =========================
+    # CREATE PAYPAL ORDER
+    # =========================
+
+    paypal_data = {
+        "intent": "CAPTURE",
+
+        "purchase_units": [
+            {
+                "reference_id": str(order.id),
+
+                "description": product.name,
+
+                "custom_id": str(order.id),
+
+                "amount": {
+                    "currency_code": "PLN",
+                    "value": f"{product.price:.2f}",
+                },
+            }
+        ],
+    }
+
+    try:
+
+        response = requests.post(
+            f"{settings.PAYPAL_BASE_URL}/v2/checkout/orders",
+            headers={
+                "Content-Type": "application/json",
+                "Authorization": f"Bearer {access_token}",
+            },
+            json=paypal_data,
+            timeout=15,
+        )
+
+        response.raise_for_status()
+
+        paypal_order = response.json()
+
+    except requests.RequestException as e:
+
+        print(
+            "PayPal create order error:",
+            e
+        )
+
+        order.delete()
+
+        return JsonResponse(
+            {
+                "error": "Nie udało się utworzyć płatności PayPal."
+            },
+            status=502
+        )
+
+    paypal_order_id = paypal_order.get("id")
+
+    if not paypal_order_id:
+
+        order.delete()
+
+        return JsonResponse(
+            {
+                "error": "PayPal nie zwrócił identyfikatora zamówienia."
+            },
+            status=502
+        )
+
+    # =========================
+    # SAVE PAYPAL ORDER ID
+    # =========================
+
+    order.paypal_order_id = paypal_order_id
+
+    order.save(
+        update_fields=[
+            "paypal_order_id"
+        ]
+    )
+
+    return JsonResponse(
+        {
+            "id": paypal_order_id
+        }
+    )
+
+
+# =========================
+# CAPTURE PAYPAL ORDER
+# =========================
+
+@require_POST
+def capture_order(request):
+
+    try:
+        data = json.loads(request.body)
+    except json.JSONDecodeError:
+        return JsonResponse(
+            {
+                "error": "Nieprawidłowe dane."
+            },
+            status=400
+        )
+
+    paypal_order_id = str(
+        data.get("orderID", "")
+    ).strip()
+
+    if not paypal_order_id:
+
+        return JsonResponse(
+            {
+                "error": "Brak identyfikatora zamówienia PayPal."
+            },
+            status=400
+        )
+
+    # =========================
+    # FIND LOCAL ORDER
+    # =========================
+
+    order = get_object_or_404(
+        Order,
+        paypal_order_id=paypal_order_id
+    )
+
+    # =========================
+    # ALREADY PAID?
+    # =========================
+
+    if order.paid:
+
+        return JsonResponse(
+            {
+                "success": True,
+                "redirect_url": "/sklep/payment-success/"
             }
         )
 
-    Order.objects.create(
-        product=product,
-        customer_name=customer_name,
-        email=email
+    # =========================
+    # GET PAYPAL TOKEN
+    # =========================
+
+    try:
+        access_token = get_paypal_access_token()
+
+    except requests.RequestException as e:
+
+        print(
+            "PayPal token error:",
+            e
+        )
+
+        return JsonResponse(
+            {
+                "error": "Nie udało się połączyć z PayPal."
+            },
+            status=502
+        )
+
+    # =========================
+    # CAPTURE
+    # =========================
+
+    try:
+
+        response = requests.post(
+            (
+                f"{settings.PAYPAL_BASE_URL}"
+                f"/v2/checkout/orders/"
+                f"{paypal_order_id}/capture"
+            ),
+            headers={
+                "Content-Type": "application/json",
+                "Authorization": f"Bearer {access_token}",
+            },
+            json={},
+            timeout=15,
+        )
+
+        response.raise_for_status()
+
+        capture_data = response.json()
+
+    except requests.RequestException as e:
+
+        print(
+            "PayPal capture error:",
+            e
+        )
+
+        return JsonResponse(
+            {
+                "error": "Nie udało się potwierdzić płatności PayPal."
+            },
+            status=502
+        )
+
+    # =========================
+    # VERIFY PAYMENT
+    # =========================
+
+    if capture_data.get("status") != "COMPLETED":
+
+        return JsonResponse(
+            {
+                "error": "Płatność nie została potwierdzona."
+            },
+            status=400
+        )
+
+    purchase_units = capture_data.get(
+        "purchase_units",
+        []
     )
 
-    # URL po sukcesie i anulowaniu
-    success_url = "https://niemieckizania.pl/sklep/payment-success/"
+    if not purchase_units:
 
-    cancel_url = "https://niemieckizania.pl/sklep/payment-cancel/"
+        return JsonResponse(
+            {
+                "error": "PayPal nie zwrócił informacji o płatności."
+            },
+            status=400
+        )
 
-    # PAYPAL REDIRECT
-    paypal_params = urlencode({
-    "business": "annawac1987@gmail.com",
-    "item_name": product.name,
-    "amount": f"{product.price:.2f}",
-    "currency_code": "PLN",
-
-    "return": success_url,
-    "cancel_return": cancel_url,
-
-    "rm": "0",
-    "cbt": "Powrót do Niemiecki z Anią",
-    "no_shipping": "1",
-    "no_note": "1",
-})
-
-    paypal_url = (
-        "https://www.paypal.com/cgi-bin/webscr"
-        f"?cmd=_xclick&{paypal_params}"
+    payments = purchase_units[0].get(
+        "payments",
+        {}
     )
-    print(paypal_url)
 
-    return redirect(
-        paypal_url
+    captures = payments.get(
+        "captures",
+        []
+    )
+
+    if not captures:
+
+        return JsonResponse(
+            {
+                "error": "Nie znaleziono potwierdzonej transakcji."
+            },
+            status=400
+        )
+
+    capture = captures[0]
+
+    if capture.get("status") != "COMPLETED":
+
+        return JsonResponse(
+            {
+                "error": "Transakcja nie została zakończona."
+            },
+            status=400
+        )
+
+    # =========================
+    # MARK ORDER AS PAID
+    # =========================
+
+    order.paid = True
+
+    order.save(
+        update_fields=[
+            "paid"
+        ]
+    )
+
+    print(
+        f"PayPal payment completed: "
+        f"Order #{order.id}, "
+        f"PayPal ID: {paypal_order_id}"
+    )
+
+    return JsonResponse(
+        {
+            "success": True,
+            "redirect_url": "/sklep/payment-success/"
+        }
     )
 
 

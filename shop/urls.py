@@ -4,9 +4,11 @@ from .views import (
     sklep,
     product_detail,
     create_order,
+    capture_order,
     payment_success,
     payment_cancel,
 )
+
 
 urlpatterns = [
 
@@ -23,15 +25,21 @@ urlpatterns = [
     ),
 
     path(
-        "",
-        sklep,
-        name="sklep"
-    ),
-
-    path(
         "order/<slug:slug>/",
         create_order,
         name="create_order"
+    ),
+
+    path(
+        "capture-order/",
+        capture_order,
+        name="capture_order"
+    ),
+
+    path(
+        "",
+        sklep,
+        name="sklep"
     ),
 
     path(

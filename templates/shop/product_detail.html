@@ -2,167 +2,387 @@
 
 {% block content %}
 
-<div class="container">
+<div class="product-detail-container">
 
-    <div class="product-detail-container">
+    <!-- LEWA STRONA -->
 
-        <!-- LEWA STRONA -->
+    <div class="product-detail-image">
 
-        <div class="product-detail-image">
+        {% if product.image %}
+            <img
+                src="{{ product.image.url }}"
+                alt="{{ product.name }}"
+            >
+        {% endif %}
 
-            {% if product.image %}
-                <img
-                    src="{{ product.image.url }}"
-                    alt="{{ product.name }}"
+    </div>
+
+
+    <!-- PRAWA STRONA -->
+
+    <div class="product-detail-info">
+
+        <h1>
+            {{ product.name }}
+        </h1>
+
+        <div class="product-price">
+            {{ product.price|floatformat:2 }} PLN
+        </div>
+
+        <p class="product-description">
+            {{ product.description }}
+        </p>
+
+
+        <!-- ERROR -->
+
+        {% if error %}
+
+        <div
+        style="
+        background:#ffeaea;
+        color:#c62828;
+        padding:12px;
+        border-radius:10px;
+        margin-bottom:20px;
+        "
+        >
+
+            {{ error }}
+
+        </div>
+
+        {% endif %}
+
+
+        <!-- ORDER -->
+
+        <div class="product-actions">
+
+            <form
+                method="POST"
+                action="{% url 'create_order' product.slug %}"
+                class="paypal-form"
+                id="paypal-form"
+            >
+
+                {% csrf_token %}
+
+                <input
+                    type="text"
+                    name="customer_name"
+                    id="customer_name"
+                    placeholder="👤 Twoje imię"
+                    required
+                    class="email-input"
                 >
-            {% endif %}
+
+                <input
+                    type="email"
+                    name="email"
+                    id="email"
+                    placeholder="📩 Twój email"
+                    required
+                    class="email-input"
+                >
+
+                <!-- PAYPAL BUTTON -->
+
+                <div
+                    id="paypal-button-container"
+                    class="paypal-btn"
+                ></div>
+
+            </form>
+
+
+            <a
+                href="mailto:niemieckizania87@gmail.com?subject=Zamowienie%20{{ product.name|urlencode }}"
+                class="email-order-link"
+            >
+
+                Lub zamów tradycyjnie przez email
+
+            </a>
 
         </div>
 
 
-        <!-- PRAWA STRONA -->
+        <!-- PAYMENT -->
 
-        <div class="product-detail-info">
+        <p class="payment-info">
 
-            <h1>
-                {{ product.name }}
-            </h1>
+            🔒 Bezpieczna płatność przez PayPal
 
-            <div class="product-price">
-                {{ product.price|floatformat:2 }} PLN
-            </div>
-
-            <p class="product-description">
-                {{ product.description }}
-            </p>
+        </p>
 
 
-            <!-- ERROR -->
+        <!-- HOW -->
 
-            {% if error %}
+        <div class="order-box">
 
-            <div
-            style="
-            background:#ffeaea;
-            color:#c62828;
-            padding:12px;
-            border-radius:10px;
-            margin-bottom:20px;
-            "
-            >
+            <h3>
 
-                {{ error }}
+                Jak zamówić?
 
-            </div>
+            </h3>
 
-            {% endif %}
+            <ol>
 
+                <li>
+                    Wpisz swoje dane
+                </li>
 
-            <!-- ORDER -->
+                <li>
+                    Kliknij „Kup teraz”
+                </li>
 
-            <div class="product-actions">
+                <li>
+                    Nastąpi przekierowanie do PayPal
+                </li>
 
-                <form
-                    method="POST"
-                    action="{% url 'create_order' product.slug %}"
-                    class="paypal-form"
-                >
+                <li>
+                    Opłać zamówienie
+                </li>
 
-                    {% csrf_token %}
+                <li>
+                    Ania ręcznie wyśle materiały na email 📩
+                </li>
 
-                    <input
-                        type="text"
-                        name="customer_name"
-                        placeholder="👤 Twoje imię"
-                        required
-                        class="email-input"
-                    >
-
-                    <input
-                        type="email"
-                        name="email"
-                        placeholder="📩 Twój email"
-                        required
-                        class="email-input"
-                    >
-
-                    <button
-                      type="submit"
-                      class="paypal-btn"
-                    >
-
-                      <span class="paypal-logo">
-                        PayPal
-                      </span>
-
-                      Zapłać {{ product.price|floatformat:2 }} PLN
-
-                    </button>
-
-                </form>
-
-
-                <a
-                    href="mailto:niemieckizania87@gmail.com?subject=Zamowienie%20{{ product.name|urlencode }}"
-                    class="email-order-link"
-                >
-
-                    Lub zamów tradycyjnie przez email
-
-                </a>
-
-            </div>
-
-
-            <!-- PAYMENT -->
-
-            <p class="payment-info">
-
-                🔒 Bezpieczna płatność przez PayPal
-
-            </p>
-
-
-            <!-- HOW -->
-
-            <div class="order-box">
-
-                <h3>
-
-                    Jak zamówić?
-
-                </h3>
-
-                <ol>
-
-                    <li>
-                        Wpisz swoje dane
-                    </li>
-
-                    <li>
-                        Kliknij „Kup teraz”
-                    </li>
-
-                    <li>
-                        Nastąpi przekierowanie do PayPal
-                    </li>
-
-                    <li>
-                        Opłać zamówienie
-                    </li>
-
-                    <li>
-                        Ania ręcznie wyśle materiały na email 📩
-                    </li>
-
-                </ol>
-
-            </div>
+            </ol>
 
         </div>
 
     </div>
 
 </div>
+
+
+<!-- ========================= -->
+<!-- PAYPAL JAVASCRIPT SDK -->
+<!-- ========================= -->
+
+<script src="https://www.paypal.com/sdk/js?client-id={{ paypal_client_id }}&currency=PLN&intent=capture"></script>
+
+<script>
+
+    const paypalForm = document.getElementById("paypal-form");
+
+    const customerNameInput = document.getElementById("customer_name");
+
+    const emailInput = document.getElementById("email");
+
+    const csrfToken = paypalForm.querySelector(
+        "[name=csrfmiddlewaretoken]"
+    ).value;
+
+
+    paypal.Buttons({
+
+        style: {
+            layout: "horizontal",
+            color: "gold",
+            shape: "rect",
+            label: "paypal",
+            height: 48
+        },
+
+
+        // =========================
+        // CREATE PAYPAL ORDER
+        // =========================
+
+        createOrder: function () {
+
+            const customerName =
+                customerNameInput.value.trim();
+
+            const email =
+                emailInput.value.trim();
+
+
+            if (!customerName) {
+
+                alert("Podaj swoje imię.");
+
+                customerNameInput.focus();
+
+                return Promise.reject(
+                    new Error("Brak imienia.")
+                );
+            }
+
+
+            if (!email) {
+
+                alert("Podaj swój adres email.");
+
+                emailInput.focus();
+
+                return Promise.reject(
+                    new Error("Brak adresu email.")
+                );
+            }
+
+
+            return fetch(
+                "{% url 'create_order' product.slug %}",
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-CSRFToken": csrfToken
+                    },
+
+                    body: JSON.stringify({
+
+                        customer_name:
+                            customerName,
+
+                        email:
+                            email
+
+                    })
+                }
+            )
+
+            .then(function (response) {
+
+                if (!response.ok) {
+
+                    return response.json()
+                        .then(function (data) {
+
+                            throw new Error(
+                                data.error ||
+                                "Nie udało się utworzyć zamówienia."
+                            );
+
+                        });
+
+                }
+
+                return response.json();
+
+            })
+
+            .then(function (order) {
+
+                if (!order.id) {
+
+                    throw new Error(
+                        "PayPal nie zwrócił numeru zamówienia."
+                    );
+
+                }
+
+                return order.id;
+
+            });
+
+        },
+
+
+        // =========================
+        // AFTER PAYPAL APPROVAL
+        // =========================
+
+        onApprove: function (data) {
+
+            return fetch(
+                "{% url 'capture_order' %}",
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-CSRFToken": csrfToken
+                    },
+
+                    body: JSON.stringify({
+
+                        orderID:
+                            data.orderID
+
+                    })
+                }
+            )
+
+            .then(function (response) {
+
+                return response.json()
+                    .then(function (result) {
+
+                        if (!response.ok) {
+
+                            throw new Error(
+                                result.error ||
+                                "Nie udało się potwierdzić płatności."
+                            );
+
+                        }
+
+                        return result;
+
+                    });
+
+            })
+
+            .then(function (result) {
+
+                if (result.success) {
+
+                    window.location.href =
+                        result.redirect_url;
+
+                    return;
+
+                }
+
+                throw new Error(
+                    "Płatność nie została potwierdzona."
+                );
+
+            });
+
+        },
+
+
+        // =========================
+        // PAYPAL ERROR
+        // =========================
+
+        onError: function (error) {
+
+            console.error(
+                "PayPal error:",
+                error
+            );
+
+            alert(
+                "Wystąpił problem z płatnością PayPal. Spróbuj ponownie."
+            );
+
+        },
+
+
+        // =========================
+        // CANCEL
+        // =========================
+
+        onCancel: function () {
+
+            window.location.href =
+                "{% url 'payment_cancel' %}";
+
+        }
+
+    }).render(
+        "#paypal-button-container"
+    );
+
+</script>
 
 {% endblock %}
