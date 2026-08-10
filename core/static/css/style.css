@@ -1374,3 +1374,173 @@ flex-direction:column;
 .back-btn:hover{
     transform:translateY(-2px);
 }
+
+/* =========================================
+   PAYPAL CHECKOUT
+========================================= */
+
+.paypal-checkout {
+    margin-top: 28px;
+    padding: 24px;
+    border: 1px solid #e8e8e8;
+    border-radius: 18px;
+    background: #ffffff;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+}
+
+
+.paypal-checkout-header {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    margin-bottom: 20px;
+}
+
+
+.paypal-lock {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #f5f7fa;
+    border-radius: 12px;
+
+    font-size: 20px;
+}
+
+
+.paypal-checkout-header strong {
+    display: block;
+
+    font-size: 16px;
+    font-weight: 700;
+
+    color: #222;
+}
+
+
+.paypal-checkout-header small {
+    display: block;
+
+    margin-top: 3px;
+
+    font-size: 13px;
+    color: #777;
+}
+
+
+.paypal-form {
+    width: 100%;
+}
+
+
+.paypal-form .email-input {
+    width: 100%;
+    box-sizing: border-box;
+
+    height: 50px;
+
+    margin-bottom: 12px;
+
+    padding: 0 16px;
+
+    border: 1px solid #dedede;
+    border-radius: 11px;
+
+    background: #fafafa;
+
+    font-size: 15px;
+
+    outline: none;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+
+.paypal-form .email-input:focus {
+    border-color: #0070ba;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 0 0 3px rgba(0, 112, 186, 0.10);
+}
+
+
+.paypal-button-wrapper {
+    width: 100%;
+
+    margin-top: 6px;
+}
+
+
+.paypal-button-wrapper iframe {
+    border-radius: 11px !important;
+}
+
+
+.paypal-error {
+    display: none;
+
+    margin-top: 14px;
+    padding: 12px 14px;
+
+    border-radius: 10px;
+
+    background: #fff0f0;
+
+    color: #c62828;
+
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+
+.email-order-link {
+    display: block;
+
+    margin-top: 18px;
+
+    text-align: center;
+
+    color: #666;
+
+    font-size: 14px;
+
+    text-decoration: none;
+
+    transition: color 0.2s ease;
+}
+
+
+.email-order-link:hover {
+    color: #0070ba;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+
+    .paypal-checkout {
+        padding: 18px;
+        border-radius: 15px;
+    }
+
+    .paypal-checkout-header {
+        margin-bottom: 16px;
+    }
+
+    .paypal-checkout-header small {
+        font-size: 12px;
+    }
+
+}

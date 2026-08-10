@@ -35,24 +35,23 @@
         </p>
 
 
-        <!-- ERROR -->
+        <!-- PAYPAL CHECKOUT -->
 
-        <div
-            id="paypal-error"
-            style="
-                display:none;
-                background:#ffeaea;
-                color:#c62828;
-                padding:12px;
-                border-radius:10px;
-                margin-bottom:20px;
-            "
-        ></div>
+        <div class="paypal-checkout">
 
+            <div class="paypal-checkout-header">
 
-        <!-- ORDER -->
+                <span class="paypal-lock">
+                    🔒
+                </span>
 
-        <div class="product-actions">
+                <div>
+                    <strong>Bezpieczna płatność</strong>
+                    <small>Zapłać szybko i bezpiecznie przez PayPal</small>
+                </div>
+
+            </div>
+
 
             <form
                 id="paypal-form"
@@ -79,33 +78,35 @@
                     class="email-input"
                 >
 
-                <!-- PAYPAL BUTTON -->
+
+                <!-- PAYPAL -->
 
                 <div
                     id="paypal-button-container"
-                    class="paypal-btn"
+                    class="paypal-button-wrapper"
+                ></div>
+
+
+                <!-- ERROR -->
+
+                <div
+                    id="paypal-error"
+                    class="paypal-error"
                 ></div>
 
             </form>
 
-
-            <a
-                href="mailto:niemieckizania87@gmail.com?subject=Zamowienie%20{{ product.name|urlencode }}"
-                class="email-order-link"
-            >
-                Lub zamów tradycyjnie przez email
-            </a>
-
         </div>
 
 
-        <!-- PAYMENT -->
+        <!-- EMAIL -->
 
-        <p class="payment-info">
-
-            🔒 Bezpieczna płatność przez PayPal
-
-        </p>
+        <a
+            href="mailto:niemieckizania87@gmail.com?subject=Zamowienie%20{{ product.name|urlencode }}"
+            class="email-order-link"
+        >
+            Lub zamów tradycyjnie przez email
+        </a>
 
 
         <!-- HOW -->
@@ -118,25 +119,13 @@
 
             <ol>
 
-                <li>
-                    Wpisz swoje dane
-                </li>
+                <li>Wpisz swoje imię i email.</li>
 
-                <li>
-                    Kliknij „Kup teraz”
-                </li>
+                <li>Kliknij przycisk PayPal.</li>
 
-                <li>
-                    Nastąpi przekierowanie do PayPal
-                </li>
+                <li>Zaloguj się do PayPal i opłać zamówienie.</li>
 
-                <li>
-                    Opłać zamówienie
-                </li>
-
-                <li>
-                    Ania ręcznie wyśle materiały na email 📩
-                </li>
+                <li>Ania wyśle materiały na podany email.</li>
 
             </ol>
 
@@ -156,8 +145,9 @@
 
 document.addEventListener("DOMContentLoaded", function () {
 
-    const form = document.getElementById("paypal-form");
-    const errorBox = document.getElementById("paypal-error");
+    const errorBox =
+        document.getElementById("paypal-error");
+
 
     function showError(message) {
 
@@ -169,26 +159,52 @@ document.addEventListener("DOMContentLoaded", function () {
 
     paypal.Buttons({
 
+        /*
+         * TYLKO PAYPAL
+         *
+         * Nie pokazujemy:
+         * - karty
+         * - SEPA
+         * - innych funding sources
+         */
+
+        fundingSource: paypal.FUNDING.PAYPAL,
+
+
         style: {
+
             layout: "vertical",
+
             shape: "rect",
-            label: "paypal"
+
+            label: "paypal",
+
+            height: 50
+
         },
 
 
         // =========================
-        // CREATE PAYPAL ORDER
+        // CREATE ORDER
         // =========================
 
         createOrder: async function () {
 
             errorBox.style.display = "none";
 
+
             const customerName =
-                document.getElementById("customer_name").value.trim();
+                document
+                    .getElementById("customer_name")
+                    .value
+                    .trim();
+
 
             const email =
-                document.getElementById("email").value.trim();
+                document
+                    .getElementById("email")
+                    .value
+                    .trim();
 
 
             if (!customerName || !email) {
@@ -213,22 +229,35 @@ document.addEventListener("DOMContentLoaded", function () {
             const response = await fetch(
                 "{% url 'create_order' product.slug %}",
                 {
+
                     method: "POST",
 
                     headers: {
-                        "Content-Type": "application/json",
-                        "X-CSRFToken": csrfToken
+
+                        "Content-Type":
+                            "application/json",
+
+                        "X-CSRFToken":
+                            csrfToken
+
                     },
 
                     body: JSON.stringify({
-                        customer_name: customerName,
-                        email: email
+
+                        customer_name:
+                            customerName,
+
+                        email:
+                            email
+
                     })
+
                 }
             );
 
 
-            const data = await response.json();
+            const data =
+                await response.json();
 
 
             if (!response.ok) {
@@ -246,26 +275,13 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
 
-            if (!data.id) {
-
-                showError(
-                    "PayPal nie zwrócił identyfikatora zamówienia."
-                );
-
-                throw new Error(
-                    "Brak PayPal Order ID."
-                );
-
-            }
-
-
             return data.id;
 
         },
 
 
         // =========================
-        // CAPTURE PAYPAL ORDER
+        // PAYMENT APPROVED
         // =========================
 
         onApprove: async function (data) {
@@ -282,24 +298,38 @@ document.addEventListener("DOMContentLoaded", function () {
             const response = await fetch(
                 "{% url 'capture_order' %}",
                 {
+
                     method: "POST",
 
                     headers: {
-                        "Content-Type": "application/json",
-                        "X-CSRFToken": csrfToken
+
+                        "Content-Type":
+                            "application/json",
+
+                        "X-CSRFToken":
+                            csrfToken
+
                     },
 
                     body: JSON.stringify({
-                        orderID: data.orderID
+
+                        orderID:
+                            data.orderID
+
                     })
+
                 }
             );
 
 
-            const result = await response.json();
+            const result =
+                await response.json();
 
 
-            if (!response.ok || !result.success) {
+            if (
+                !response.ok ||
+                !result.success
+            ) {
 
                 showError(
                     result.error ||
