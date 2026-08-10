@@ -13,7 +13,7 @@ class ShopCategory(models.Model):
     )
 
     class Meta:
-        ordering = ['name']
+        ordering = ["name"]
         verbose_name = "Category"
         verbose_name_plural = "Categories"
 
@@ -45,16 +45,14 @@ class Product(models.Model):
         decimal_places=2
     )
 
-    
-
     file = models.FileField(
-        upload_to='products/',
+        upload_to="products/",
         blank=True,
         null=True
     )
 
     image = models.ImageField(
-        upload_to='products/images/',
+        upload_to="products/images/",
         blank=True,
         null=True
     )
@@ -68,7 +66,7 @@ class Product(models.Model):
     )
 
     class Meta:
-        ordering = ['-created_at']
+        ordering = ["-created_at"]
 
     def __str__(self):
         return self.name
@@ -90,9 +88,23 @@ class Order(models.Model):
 
     email = models.EmailField()
 
+    # PayPal Order ID
+    paypal_order_id = models.CharField(
+        max_length=100,
+        blank=True,
+        null=True,
+        unique=True
+    )
+
+    # Czy płatność została faktycznie wykonana
+    paid = models.BooleanField(
+        default=False
+    )
+
     created_at = models.DateTimeField(
         auto_now_add=True
     )
 
     def __str__(self):
         return f"{self.customer_name} - {self.product.name}"
+
