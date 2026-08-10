@@ -1,37 +1,63 @@
 {% extends "base.html" %}
 
-{%block content%}
-<section class="contact">
-  <div class="container contact-wrapper">
+{% block content %}
 
-    <div class="contact-text">
-      <h2>Masz pytania? Chcesz zacząć naukę?</h2>
+<div class="contact-text">
+  <h2>Masz pytania? Chcesz zacząć naukę?</h2>
 
-      <p>
-        Napisz do mnie i umów się na pierwszą lekcję 👇  
-        Odpowiem jak najszybciej i dopasujemy naukę do Twojego poziomu.
-      </p>
+  <p>
+    Napisz do mnie i umów się na pierwszą lekcję 👇
+    Odpowiem jak najszybciej i dopasujemy naukę do Twojego poziomu.
+  </p>
 
-      <ul>
-        <li>✔️ Lekcje 1:1 online</li>
-        <li>✔️ Nauka od podstaw (A1–B2)</li>
-        <li>✔️ Praktyczny niemiecki do życia w DE 🇩🇪</li>
-        <li>✔️ Kontakt z żywym językiem – rozmowy z native speakerem</li>
-      </ul>
-    </div>
+  <ul>
+    <li>✔️ Lekcje 1:1 online</li>
+    <li>✔️ Nauka od podstaw (A1–B2)</li>
+    <li>✔️ Praktyczny niemiecki do życia w DE 🇩🇪</li>
+    <li>✔️ Kontakt z żywym językiem – rozmowy z native speakerem</li>
+  </ul>
+</div>
 
-    <!-- FORM -->
-    <form method="POST" class="contact-form">
-      {% csrf_token %}
-      <input type="text" name="name" placeholder="Twoje imię" required>
-      <input type="email" name="email" placeholder="Twój email" required>
-      <textarea name="message" placeholder="Twoja wiadomość..." required></textarea>
+<!-- FORM -->
+<form method="POST" class="contact-form">
+  {% csrf_token %}
 
-      <button type="submit" class="btn">
-        📩 Wyślij wiadomość
-      </button>
-    </form>
+  <input
+    type="text"
+    name="name"
+    placeholder="Twoje imię"
+    required
+  >
 
-  </div>
-</section>
-{% endblock%}
+  <input
+    type="email"
+    name="email"
+    placeholder="Twój email"
+    required
+  >
+
+  <textarea
+    name="message"
+    placeholder="Twoja wiadomość..."
+    required
+  ></textarea>
+
+  <!-- CLOUDFLARE TURNSTILE -->
+  <div
+    class="cf-turnstile"
+    data-sitekey="{{ turnstile_site_key }}"
+  ></div>
+
+  <button type="submit" class="btn">
+    📩 Wyślij wiadomość
+  </button>
+</form>
+
+<!-- CLOUDFLARE TURNSTILE SCRIPT -->
+<script
+  src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+  async
+  defer
+></script>
+
+{% endblock %}
