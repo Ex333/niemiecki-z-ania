@@ -37,23 +37,17 @@
 
         <!-- ERROR -->
 
-        {% if error %}
-
         <div
-        style="
-        background:#ffeaea;
-        color:#c62828;
-        padding:12px;
-        border-radius:10px;
-        margin-bottom:20px;
-        "
-        >
-
-            {{ error }}
-
-        </div>
-
-        {% endif %}
+            id="paypal-error"
+            style="
+                display:none;
+                background:#ffeaea;
+                color:#c62828;
+                padding:12px;
+                border-radius:10px;
+                margin-bottom:20px;
+            "
+        ></div>
 
 
         <!-- ORDER -->
@@ -61,10 +55,8 @@
         <div class="product-actions">
 
             <form
-                method="POST"
-                action="{% url 'create_order' product.slug %}"
-                class="paypal-form"
                 id="paypal-form"
+                class="paypal-form"
             >
 
                 {% csrf_token %}
@@ -101,9 +93,7 @@
                 href="mailto:niemieckizania87@gmail.com?subject=Zamowienie%20{{ product.name|urlencode }}"
                 class="email-order-link"
             >
-
                 Lub zamów tradycyjnie przez email
-
             </a>
 
         </div>
@@ -123,9 +113,7 @@
         <div class="order-box">
 
             <h3>
-
                 Jak zamówić?
-
             </h3>
 
             <ol>
@@ -159,33 +147,32 @@
 </div>
 
 
-<!-- ========================= -->
-<!-- PAYPAL JAVASCRIPT SDK -->
-<!-- ========================= -->
+<!-- PAYPAL SDK -->
 
 <script src="https://www.paypal.com/sdk/js?client-id={{ paypal_client_id }}&currency=PLN&intent=capture"></script>
 
+
 <script>
 
-    const paypalForm = document.getElementById("paypal-form");
+document.addEventListener("DOMContentLoaded", function () {
 
-    const customerNameInput = document.getElementById("customer_name");
+    const form = document.getElementById("paypal-form");
+    const errorBox = document.getElementById("paypal-error");
 
-    const emailInput = document.getElementById("email");
+    function showError(message) {
 
-    const csrfToken = paypalForm.querySelector(
-        "[name=csrfmiddlewaretoken]"
-    ).value;
+        errorBox.textContent = message;
+        errorBox.style.display = "block";
+
+    }
 
 
     paypal.Buttons({
 
         style: {
-            layout: "horizontal",
-            color: "gold",
+            layout: "vertical",
             shape: "rect",
-            label: "paypal",
-            height: 48
+            label: "paypal"
         },
 
 
@@ -193,40 +180,37 @@
         // CREATE PAYPAL ORDER
         // =========================
 
-        createOrder: function () {
+        createOrder: async function () {
+
+            errorBox.style.display = "none";
 
             const customerName =
-                customerNameInput.value.trim();
+                document.getElementById("customer_name").value.trim();
 
             const email =
-                emailInput.value.trim();
+                document.getElementById("email").value.trim();
 
 
-            if (!customerName) {
+            if (!customerName || !email) {
 
-                alert("Podaj swoje imię.");
-
-                customerNameInput.focus();
-
-                return Promise.reject(
-                    new Error("Brak imienia.")
+                showError(
+                    "Podaj swoje imię oraz adres email."
                 );
+
+                throw new Error(
+                    "Brak danych klienta."
+                );
+
             }
 
 
-            if (!email) {
-
-                alert("Podaj swój adres email.");
-
-                emailInput.focus();
-
-                return Promise.reject(
-                    new Error("Brak adresu email.")
-                );
-            }
+            const csrfToken =
+                document.querySelector(
+                    "[name=csrfmiddlewaretoken]"
+                ).value;
 
 
-            return fetch(
+            const response = await fetch(
                 "{% url 'create_order' product.slug %}",
                 {
                     method: "POST",
@@ -237,61 +221,65 @@
                     },
 
                     body: JSON.stringify({
-
-                        customer_name:
-                            customerName,
-
-                        email:
-                            email
-
+                        customer_name: customerName,
+                        email: email
                     })
                 }
-            )
+            );
 
-            .then(function (response) {
 
-                if (!response.ok) {
+            const data = await response.json();
 
-                    return response.json()
-                        .then(function (data) {
 
-                            throw new Error(
-                                data.error ||
-                                "Nie udało się utworzyć zamówienia."
-                            );
+            if (!response.ok) {
 
-                        });
+                showError(
+                    data.error ||
+                    "Nie udało się utworzyć płatności PayPal."
+                );
 
-                }
+                throw new Error(
+                    data.error ||
+                    "PayPal order creation failed."
+                );
 
-                return response.json();
+            }
 
-            })
 
-            .then(function (order) {
+            if (!data.id) {
 
-                if (!order.id) {
+                showError(
+                    "PayPal nie zwrócił identyfikatora zamówienia."
+                );
 
-                    throw new Error(
-                        "PayPal nie zwrócił numeru zamówienia."
-                    );
+                throw new Error(
+                    "Brak PayPal Order ID."
+                );
 
-                }
+            }
 
-                return order.id;
 
-            });
+            return data.id;
 
         },
 
 
         // =========================
-        // AFTER PAYPAL APPROVAL
+        // CAPTURE PAYPAL ORDER
         // =========================
 
-        onApprove: function (data) {
+        onApprove: async function (data) {
 
-            return fetch(
+            errorBox.style.display = "none";
+
+
+            const csrfToken =
+                document.querySelector(
+                    "[name=csrfmiddlewaretoken]"
+                ).value;
+
+
+            const response = await fetch(
                 "{% url 'capture_order' %}",
                 {
                     method: "POST",
@@ -302,68 +290,29 @@
                     },
 
                     body: JSON.stringify({
-
-                        orderID:
-                            data.orderID
-
+                        orderID: data.orderID
                     })
                 }
-            )
+            );
 
-            .then(function (response) {
 
-                return response.json()
-                    .then(function (result) {
+            const result = await response.json();
 
-                        if (!response.ok) {
 
-                            throw new Error(
-                                result.error ||
-                                "Nie udało się potwierdzić płatności."
-                            );
+            if (!response.ok || !result.success) {
 
-                        }
-
-                        return result;
-
-                    });
-
-            })
-
-            .then(function (result) {
-
-                if (result.success) {
-
-                    window.location.href =
-                        result.redirect_url;
-
-                    return;
-
-                }
-
-                throw new Error(
-                    "Płatność nie została potwierdzona."
+                showError(
+                    result.error ||
+                    "Nie udało się potwierdzić płatności."
                 );
 
-            });
+                return;
 
-        },
+            }
 
 
-        // =========================
-        // PAYPAL ERROR
-        // =========================
-
-        onError: function (error) {
-
-            console.error(
-                "PayPal error:",
-                error
-            );
-
-            alert(
-                "Wystąpił problem z płatnością PayPal. Spróbuj ponownie."
-            );
+            window.location.href =
+                result.redirect_url;
 
         },
 
@@ -377,11 +326,31 @@
             window.location.href =
                 "{% url 'payment_cancel' %}";
 
+        },
+
+
+        // =========================
+        // ERROR
+        // =========================
+
+        onError: function (err) {
+
+            console.error(
+                "PayPal error:",
+                err
+            );
+
+            showError(
+                "Wystąpił problem z płatnością PayPal. Spróbuj ponownie."
+            );
+
         }
 
     }).render(
         "#paypal-button-container"
     );
+
+});
 
 </script>
 
